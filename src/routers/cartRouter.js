@@ -19,5 +19,10 @@ cartRouter.get('/:id/productos', function(req, res, next){
   res.send(cartManager.getProductsOfCartWhitID(req.params.id));
 });
 
+// Retorna los productos del carrito con id :id
+cartRouter.post('/:id/productos', function(req, res, next){
+  res.send(cartManager.addProductsOfCartWhitID(req.params.id, req.body.productID));
+});
+
 // Exporto ruta
 export default cartRouter;

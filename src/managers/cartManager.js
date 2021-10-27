@@ -1,4 +1,5 @@
 import FileManager from './fileManager.js';
+import productManager from './productManager.js';
 
 class CartManager {
   constructor() {
@@ -45,6 +46,19 @@ class CartManager {
   getProductsOfCartWhitID(cartID){
     let cart = this.getCartByID();
     return cart.products;
+  }
+
+  // Agrega el producto con id productID al carrito con id cartID
+  addProductsOfCartWhitID(cartID, productID){
+    const product = productManager.getPorductByID(productID);
+    const carts = this.getAllCarts();
+
+    carts.forEach(cart =>{
+      if (cart.id == cartID){
+        cart.products.push(product);
+      }
+    })
+    this.save(products);
   }
 
   // Guarda los datos con el formato correcto
