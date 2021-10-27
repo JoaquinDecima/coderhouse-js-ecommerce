@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 export default class FileManager{
   constructor(path){
     this.path = path;
