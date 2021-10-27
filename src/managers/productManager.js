@@ -1,6 +1,6 @@
 import FileManager from './fileManager.js';
 
-class ProductManager {
+export default class ProductManager {
   constructor() {
     this.lastProductID = 0;
     this.fileManager = new FileManager('./products.file');
