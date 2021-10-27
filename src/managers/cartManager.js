@@ -28,21 +28,21 @@ class CartManager {
     return this.lastCartID;
   }
 
-  // Elimina los carritos con el id numID
-  removeCartById(numID){
+  // Elimina los carritos con el id cartID
+  removeCartById(cartID){
     let carts = this.getAllCarts();
-    carts = carts.filter(cart => cart.id != numID);
+    carts = carts.filter(cart => cart.id != cartID);
     this.save(carts);
   }
 
   // Obtiene un carrito mediante su ID
-  getCartByID(numID){
+  getCartByID(cartID){
     const carts = this.getAllCarts();
-    return carts.find(product => product.id == numID);
+    return carts.find(product => product.id == cartID);
   }
 
-  // Retorna los productos del carrico con id numID
-  getProductsOfCartWhitID(numID){
+  // Retorna los productos del carrico con id cartID
+  getProductsOfCartWhitID(cartID){
     let cart = this.getCartByID();
     return cart.products;
   }

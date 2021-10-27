@@ -12,15 +12,15 @@ class ProductManager {
   }
 
   // Obtiene un producto mediante su ID
-  getPorductByID(numID){
+  getPorductByID(productID){
     const products = this.getAllProducts();
-    return products.find(product => product.id == numID);
+    return products.find(product => product.id == productID);
   }
 
-  // Elimina los productos con el id numID
-  removeProductById(numID){
+  // Elimina los productos con el id productID
+  removeProductById(productID){
     let products = this.getAllProducts();
-    products = products.filter(product => product.id != numID);
+    products = products.filter(product => product.id != productID);
     this.save(products);
   }
 
