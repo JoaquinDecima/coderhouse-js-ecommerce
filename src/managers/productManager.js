@@ -48,21 +48,21 @@ export default class ProductManager {
 
   // Edita el producto de id :id
   editProductByID(id, nombre, descripcion, codigo, foto, precio, stock){
-    const elems = this.getAll();
+    const products = this.getAllProducts();
     var cambio = false;
 
-    elems.forEach(elem =>{
-      if (elem.id == id){
-        elem.nombre = nombre;
-        elem.descripcion = descripcion;
-        elem.codigo = codigo;
-        elem.foto = foto;
-        elem.precio = precio;
-        elem.stock = stock;
+    products.forEach(product =>{
+      if (product.id == id){
+        product.nombre = nombre;
+        product.descripcion = descripcion;
+        product.codigo = codigo;
+        product.foto = foto;
+        product.precio = precio;
+        product.stock = stock;
         cambio = true;
       }
     })
-    this.save(elems);
+    this.save(products);
 
     return cambio;
   }
