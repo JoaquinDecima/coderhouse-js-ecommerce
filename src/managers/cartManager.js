@@ -28,6 +28,13 @@ export default class CartManager {
     return this.lastCartID;
   }
 
+  // Elimina los carritos con el id numID
+  removeCartById(numID){
+    let carts = this.getAllCarts();
+    carts = carts.filter(cart => cart.id != numID);
+    this.save(carts);
+  }
+
   // Guarda los datos con el formato correcto
   save(data){
     this.fileManager.writeData(JSON.stringify(data,null,2));

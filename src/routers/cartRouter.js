@@ -10,5 +10,10 @@ cartRouter.post('/', function(req, res, next){
   res.send({id});
 });
 
+// Elimina el carrito con id :id
+cartRouter.delete('/:id', function(req, res, next){
+  res.send(cartManager.removeCartById(req.params.id));
+});
+
 // Exporto ruta
 export default cartRouter;
