@@ -26,7 +26,7 @@ productRouter.post('/', function(req, res, next){
       req.body.stock);
     res.send({id});
   }else {
-    res.send({error:'ruta /api/products/:id con metodo POST no autorizada'});
+    res.send({error:-1, descripcion:'ruta /api/products/:id con metodo POST no autorizada'});
   }
 });
 
@@ -35,7 +35,7 @@ productRouter.delete('/:id', function(req, res, next){
   if (true) {
     res.send(productManager.removeProductById(req.params.id));
   }else {
-    res.send({error:'ruta /api/products/:id con metodo DELETE no autorizada'});
+    res.send({error:-1, descripcion:'ruta /api/products/:id con metodo DELETE no autorizada'});
   }
 });
 
@@ -55,7 +55,7 @@ productRouter.put('/:id', function(req, res, next){
       res.send({error:'Producto no encontrado'});
     }
   } else {
-    res.send({error:'ruta /api/products/:id con metodo PUT no autorizada'});
+    res.send({error:-1, descripcion:'ruta /api/products/:id con metodo PUT no autorizada'});
   }
 
 });
