@@ -197,3 +197,4 @@ package-lock.json
 # Files persist
 
 products.file
+carts.file
