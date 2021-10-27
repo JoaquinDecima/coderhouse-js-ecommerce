@@ -18,7 +18,7 @@ export default class ProductManager {
   }
 
   // Elimina los productos con el id numID
-  deleteProductById(numID){
+  removeProductById(numID){
     let elems = this.getAll();
     elems = elems.filter(elem => elem.id != numID);
     this.save(elems);
@@ -44,6 +44,27 @@ export default class ProductManager {
     this.save(content);
 
     return this.lastProductID;
+  }
+
+  // Edita el producto de id :id
+  editProductByID(id, nombre, descripcion, codigo, foto, precio, stock){
+    const elems = this.getAll();
+    var cambio = false;
+
+    elems.forEach(elem =>{
+      if (elem.id == id){
+        elem.nombre = nombre;
+        elem.descripcion = descripcion;
+        elem.codigo = codigo;
+        elem.foto = foto;
+        elem.precio = precio;
+        elem.stock = stock;
+        cambio = true;
+      }
+    })
+    this.save(elems);
+
+    return cambio;
   }
 
   // Guarda los datos con el formato correcto
