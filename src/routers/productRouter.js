@@ -1,8 +1,7 @@
 import express from 'express';
-import ProductManager from '../managers/productManager.js';
+import productManager from '../managers/productManager.js';
 
 const productRouter = express.Router();
-const productManager = new ProductManager();
 
 // Retorno todos los productos
 productRouter.get('/', (req, res, next) =>{
