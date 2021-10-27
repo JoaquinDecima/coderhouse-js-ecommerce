@@ -35,6 +35,18 @@ class CartManager {
     this.save(carts);
   }
 
+  // Obtiene un carrito mediante su ID
+  getCartByID(numID){
+    const carts = this.getAllCarts();
+    return carts.find(product => product.id == numID);
+  }
+
+  // Retorna los productos del carrico con id numID
+  getProductsOfCartWhitID(numID){
+    let cart = this.getCartByID();
+    return cart.products;
+  }
+
   // Guarda los datos con el formato correcto
   save(data){
     this.fileManager.writeData(JSON.stringify(data,null,2));
