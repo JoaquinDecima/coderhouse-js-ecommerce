@@ -19,9 +19,9 @@ export default class ProductManager {
 
   // Elimina los productos con el id numID
   removeProductById(numID){
-    let elems = this.getAll();
-    elems = elems.filter(elem => elem.id != numID);
-    this.save(elems);
+    let products = this.getAllProducts();
+    products = products.filter(product => product.id != numID);
+    this.save(products);
   }
 
   // Agrega un Porducto
