@@ -1,6 +1,6 @@
 import FileManager from './fileManager.js';
 
-export default class CartManager {
+class CartManager {
   constructor() {
     this.fileManager = new FileManager('./carts.file');
     this.lastCartID = 0;
@@ -40,3 +40,6 @@ export default class CartManager {
     this.fileManager.writeData(JSON.stringify(data,null,2));
   }
 }
+
+const cartManager = new CartManager;
+export default cartManager;
