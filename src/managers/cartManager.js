@@ -61,6 +61,18 @@ class CartManager {
     this.save(products);
   }
 
+  // Elimina el producto con id productID del carrito con id cartID
+  removeProductsOfCartWhitID(cartID, productID){
+    const carts = this.getAllCarts();
+
+    carts.forEach(cart =>{
+      if (cart.id == cartID){
+        cart.products.filter(product => product.id != productID);
+      }
+    })
+    this.save(products);
+  }
+
   // Guarda los datos con el formato correcto
   save(data){
     this.fileManager.writeData(JSON.stringify(data,null,2));
