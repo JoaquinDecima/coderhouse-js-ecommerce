@@ -2,8 +2,8 @@ import FileManager from './fileManager.js';
 
 export default class ProductManager {
   constructor() {
-    this.lastProductID = 0;
     this.fileManager = new FileManager('./products.file');
+    this.lastProductID = this.getAllProducts().length;
   }
 
   // Retorna todos los productos
