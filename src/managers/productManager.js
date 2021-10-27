@@ -13,8 +13,8 @@ export default class ProductManager {
 
   // Obtiene un producto mediante su ID
   getPorductByID(numID){
-    const elems = this.getAll();
-    return elems.find(elem => elem.id == numID);
+    const products = this.getAllProducts();
+    return products.find(product => product.id == numID);
   }
 
   // Elimina los productos con el id numID
