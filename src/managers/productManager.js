@@ -39,8 +39,8 @@ export default class ProductManager {
       stock
     }
 
-    const content = this.getAllProducts();
-    content.push(object);
+    const products = this.getAllProducts();
+    products.push(newProduct);
     this.save(content);
 
     return this.lastProductID;
