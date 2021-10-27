@@ -193,3 +193,7 @@ $RECYCLE.BIN/
 *.lnk
 
 package-lock.json
+
+# Files persist
+
+products.file
