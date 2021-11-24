@@ -15,7 +15,8 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "express": "^4.17.1",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "mongodb": "^4.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"
