@@ -1,20 +1,18 @@
 import MongoManager from "./mongoManager";
 
-
-
 export default class ProductMongoManager {
     constructor(file = null, db = "coderhouse") {
-        this.db = new MongoManager(file, db, "product")
+        this.db = new MongoManager(file, db, "product");
     }
 
     // Retorna todos los productos
     getAllProducts(){
         this.db.readData()
             .then(data => {
-                return data
+                return data;
             })
             .catch( err => {
-                return err
+                return err;
             })
     }
 
@@ -22,16 +20,16 @@ export default class ProductMongoManager {
     getPorductByID(productID){
         this.db.readDataByID(productID)
             .then(data => {
-                return data
+                return data;
             })
             .catch(err => {
-                return err
+                return err;
             })
     }
 
     // Elimina los productos con el id productID
     removeProductById(productID){
-        this.db.deleteByID(productID)
+        this.db.deleteByID(productID);
     }
 
     // Agrega un Porducto
@@ -44,9 +42,9 @@ export default class ProductMongoManager {
             foto,
             precio,
             stock
-        }
+        };
 
-        this.db.writeData(newProduct)
+        this.db.writeData(newProduct);
     }
 
     // Edita el producto de id :id
@@ -58,7 +56,7 @@ export default class ProductMongoManager {
             foto,
             precio,
             stock
-        },{_id:id})
+        },{_id:id});
     }
 
 }

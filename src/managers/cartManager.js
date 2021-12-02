@@ -44,7 +44,7 @@ class CartManager {
 
   // Retorna los productos del carrico con id cartID
   getProductsOfCartWhitID(cartID){
-    let cart = this.getCartByID();
+    let cart = this.getCartByID(cartID);
     return cart.products;
   }
 
