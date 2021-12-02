@@ -1,6 +1,5 @@
 import MongoManager from "./mongoManager.js";
 import productManager from "./productManager.js";
-import {response} from "express";
 
 export default class CartMongoManager{
     constructor(file = null, db = "coderhouse") {
