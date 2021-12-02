@@ -11,12 +11,12 @@
     "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Joaquin (Pato)",
+  "author": "Joaquin (Pato) Decima",
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
-    "mongodb": "^4.2.0"
+    "mongodb": "^4.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"
