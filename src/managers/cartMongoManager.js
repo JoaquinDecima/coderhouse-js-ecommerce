@@ -1,9 +1,10 @@
 import MongoManager from "./mongoManager.js";
-import productManager from "./productManager.js";
+import ProductMongoManager from "./productMongoManager.js";
 
 export default class CartMongoManager{
     constructor(file = null, db = "coderhouse") {
         this.db = new MongoManager(file, db, "cart");
+        this.product = new ProductMongoManager(file, db, "product");
     }
 
     // Retorna todos los carritos
@@ -52,7 +53,7 @@ export default class CartMongoManager{
 
     // Agrega el producto con id productID al carrito con id cartID
     addProductsOfCartWhitID(cartID, productID){
-        const product = productManager.getPorductByID(productID);
+        const product = this.product.getPorductByID(productID);
 
         this.db.updateData({
             products: this.getProductsOfCartWhitID(cartID).concat(product)
