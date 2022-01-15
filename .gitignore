@@ -199,4 +199,4 @@ package-lock.json
 products.file
 carts.file
 
-.idea/
+.idea
