@@ -2,20 +2,20 @@ import express from 'express';
 import productManager from '../model/product/productManager.js';
 import { isAdmin } from '../model/tools/userRank.js';
 
-const productRouter = express.Router();
+const productRouterAPI = express.Router();
 
 // Retorno todos los productos
-productRouter.get('/', (req, res) =>{
+productRouterAPI.get('/', (req, res) =>{
 	res.send(productManager.getAllProducts());
 });
 
 // Retorno el producto con id :id
-productRouter.get('/:id', function(req, res){
+productRouterAPI.get('/:id', function(req, res){
 	res.send(productManager.getPorductByID(req.params.id));
 });
 
 // Retorno la id del producto creado
-productRouter.post('/', function(req, res){
+productRouterAPI.post('/', function(req, res){
 	if (isAdmin('')) {
 		const id = productManager.addProdcut(
 			req.body.nombre,
@@ -31,7 +31,7 @@ productRouter.post('/', function(req, res){
 });
 
 // Elimina el porducto con id :id
-productRouter.delete('/:id', function(req, res){
+productRouterAPI.delete('/:id', function(req, res){
 	if (true) {
 		res.send(productManager.removeProductById(req.params.id));
 	}else {
@@ -40,7 +40,7 @@ productRouter.delete('/:id', function(req, res){
 });
 
 // Edita el producto con id :id
-productRouter.put('/:id', function(req, res){
+productRouterAPI.put('/:id', function(req, res){
 	if (true) {
 		if(productManager.editPorductByID(
 			req.params.id,
@@ -61,4 +61,4 @@ productRouter.put('/:id', function(req, res){
 });
 
 // Exporto la ruta necesaria
-export default productRouter;
+export default productRouterAPI;
