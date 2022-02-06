@@ -2,7 +2,7 @@ import MongoManager from '../../dao/mongoManager.js';
 
 export default class ProductMongoManager {
 	constructor(file = null, db = 'coderhouse') {
-		this.db = new MongoManager(file, db, 'product');
+		this.db = new MongoManager(file, db, 'products');
 	}
 
 	// Retorna todos los productos

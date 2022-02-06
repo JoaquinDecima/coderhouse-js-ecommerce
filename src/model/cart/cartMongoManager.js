@@ -3,8 +3,8 @@ import ProductMongoManager from '../product/productMongoManager.js';
 
 export default class CartMongoManager{
 	constructor(file = null, db = 'coderhouse') {
-		this.db = new MongoManager(file, db, 'cart');
-		this.product = new ProductMongoManager(file, db, 'product');
+		this.db = new MongoManager(file, db, 'carts');
+		this.product = new ProductMongoManager(file, db, 'products');
 	}
 
 	// Retorna todos los carritos
