@@ -1,0 +1,15 @@
+:root{
+    --bg-site-g: #FFF;
+    --bg-site: #3763EB;
+    --bg-site-2: #EFF2F9;
+    --bg-site-3: rgba(106, 124, 146, 0.1);
+
+    --a-color-2: #6A7C92;
+
+    --text-color: rgba(106, 124, 146, 0.55);
+    --text-title: #051441;
+
+    --site-color: #03A9F4;
+
+    --site-radius: 10px;
+}
