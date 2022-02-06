@@ -1,6 +1,6 @@
 import express from 'express';
 import productManager from '../model/product/productManager.js';
-import { isAdmin } from '../utils/userRank.js';
+import { isAdmin } from '../model/tools/userRank.js';
 
 const productRouter = express.Router();
 

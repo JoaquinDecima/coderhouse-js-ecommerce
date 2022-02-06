@@ -15,10 +15,10 @@ app.use('/api/productos', productRouter);
 
 // Se definen casos por defecto
 app.get('*', (req, res) => {
-  res.send({error:-2, descripcion:'Ruta no implementada'});
+	res.status(404).send({error:-2, descripcion:'Ruta no implementada'});
 });
 
 // Inicio la Aplicacion
 app.listen(PORT, () => {
-  console.log(`Aplicacion inicio en http://localhost:${PORT}`);
-})
+	console.log(`Aplicacion inicio en http://localhost:${PORT}`);
+});
