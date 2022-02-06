@@ -198,5 +198,6 @@ package-lock.json
 
 products.file
 carts.file
-
-.idea
+users.file
+.idea/*.xml
+.idea/
