@@ -235,8 +235,8 @@ pre{
     font-size: 20px;
     border-radius: 5px;
     position: fixed;
-    top: 20px;
-    right: 30px;
+    bottom: 86px;
+    right: 35px;
     z-index: 10009;
     cursor: pointer;
     transition: all 0.3s ease-out 0s;
