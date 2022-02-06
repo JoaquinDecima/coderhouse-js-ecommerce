@@ -1,4 +1,5 @@
 import express from 'express';
+import exphbs from 'express-handlebars';
 import cartRouterAPI from './routers/cartRouterAPI.js';
 import productRouterAPI from './routers/productRouterAPI.js';
 
@@ -8,10 +9,23 @@ const PORT = process.env.PORT || 8080;
 
 // Configuro la App Express (middlewares)
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('public'));
+app.engine('hbs', exphbs ({
+	extname: 'hbs',
+	defaultLayout: 'index.hbs'
+}));
+
+// Configuro la app Express (setters)
+app.set('view engine', 'hbs');
 
 // Configuro las Rutas
 app.use('/api/carrito', cartRouterAPI);
 app.use('/api/productos', productRouterAPI);
+
+app.get('/', (req,res)=>{
+	res.render('index');
+});
 
 // Se definen casos por defecto
 app.get('*', (req, res) => {
