@@ -1,16 +1,19 @@
 import express from 'express';
 import { logger } from '../model/tools/logger.js';
+import authRouter from './authRouter.js';
+import authRouterAPI from './authRouterAPI.js';
 import cartRouterAPI from './cartRouterAPI.js';
 import productRouterAPI from './productRouterAPI.js';
-import authRouterAPI from './authRouterAPI.js';
 import errorRouter from './errorRouter.js';
+
 
 const globalRouter = express.Router();
 
 // Use other Routers
+globalRouter.use('/api/auth/', authRouterAPI);
 globalRouter.use('/api/carrito', cartRouterAPI);
 globalRouter.use('/api/productos', productRouterAPI);
-globalRouter.use('/api/auth/', authRouterAPI);
+globalRouter.use('/auth/', authRouter);
 globalRouter.use('/error/', errorRouter);
 
 globalRouter.get('/', (req,res)=>{
