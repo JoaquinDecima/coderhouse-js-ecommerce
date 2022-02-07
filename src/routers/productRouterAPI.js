@@ -7,19 +7,19 @@ const productRouterAPI = express.Router();
 
 // Retorno todos los productos
 productRouterAPI.get('/', (req, res) =>{
-	logger.info(`[GET] se ingreso en ${req.url}`);
+	logger.info(`[GET] se ingreso en /api/products${req.url}`);
 	res.send(productManager.getAllProducts());
 });
 
 // Retorno el producto con id :id
 productRouterAPI.get('/:id', function(req, res){
-	logger.info(`[GET] se ingreso en ${req.url}`);
+	logger.info(`[GET] se ingreso en /api/products${req.url}`);
 	res.send(productManager.getPorductByID(req.params.id));
 });
 
 // Retorno la id del producto creado
 productRouterAPI.post('/', function(req, res){
-	logger.info(`[POST] se ingreso en ${req.url}`);
+	logger.info(`[POST] se ingreso en /api/products${req.url}`);
 	if (isAdmin('')) {
 		const id = productManager.addProdcut(
 			req.body.nombre,
@@ -30,25 +30,25 @@ productRouterAPI.post('/', function(req, res){
 			req.body.stock);
 		res.send({id});
 	}else {
-		logger.warn(`[POST] No Autorizado ${req.url}`);
+		logger.warn(`[POST] No Autorizado /api/products${req.url}`);
 		res.send({error:-1, descripcion:'ruta /api/products/:id con metodo POST no autorizada'});
 	}
 });
 
 // Elimina el porducto con id :id
 productRouterAPI.delete('/:id', function(req, res){
-	logger.info(`[DELETE] se ingreso en ${req.url}`);
+	logger.info(`[DELETE] se ingreso en /api/products${req.url}`);
 	if (true) {
 		res.send(productManager.removeProductById(req.params.id));
 	}else {
-		logger.warn(`[DELETE] No autorizado ${req.url}`);
+		logger.warn(`[DELETE] No autorizado /api/products${req.url}`);
 		res.send({error:-1, descripcion:'ruta /api/products/:id con metodo DELETE no autorizada'});
 	}
 });
 
 // Edita el producto con id :id
 productRouterAPI.put('/:id', function(req, res){
-	logger.info(`[PUT] se ingreso en ${req.url}`);
+	logger.info(`[PUT] se ingreso en /api/products${req.url}`);
 	if (true) {
 		if(productManager.editPorductByID(
 			req.params.id,
@@ -60,11 +60,11 @@ productRouterAPI.put('/:id', function(req, res){
 			req.body.stock)){
 			res.send('');
 		}else{
-			logger.error(`[PUT] Error en ${req.url}`);
+			logger.error(`[PUT] Error en /api/products${req.url}`);
 			res.send({error:'Producto no encontrado'});
 		}
 	} else {
-		logger.warn(`[PUT] no autorizado ${req.url}`);
+		logger.warn(`[PUT] no autorizado /api/products${req.url}`);
 		res.send({error:-1, descripcion:'ruta /api/products/:id con metodo PUT no autorizada'});
 	}
 
