@@ -1,4 +1,5 @@
 import express from 'express';
+import flash from 'express-flash';
 import exphbs from 'express-handlebars';
 import session from 'express-session';
 import passport from 'passport';
@@ -23,8 +24,15 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next)=>{
+	app.locals.notifyMenssaje = req.flash('notifyMenssaje');
+	console.log(req.flash('notifyMenssaje'));
+	next();
+});
 
 // Configuro la app Express (setters)
 app.set('view engine', 'hbs');

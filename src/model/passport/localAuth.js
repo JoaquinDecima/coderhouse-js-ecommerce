@@ -21,15 +21,18 @@ passport.use('register', new LocalStrategy({
 	};
 
 	if ([] == usersData.getUserByID(email)){
+		req.flash('notifyMenssaje', `Usuraio ${email} ya tiene una cuenta creada, intente iniciar sesion.`);
 		logger.warn(`Usuario ${email} ya existe`);
 		return done(true,'Usuario Existente');
 	}else{
 		usersData.addUser(user)
 			.then(()=>{
+				req.flash('notifyMenssaje', `Usuraio ${email} registado con exito. Ya puedes iniciar sesion`);
 				console.info(`Se registro exitosamente ${email}`);
 				return done(null, user);
 			})
 			.catch(err => {
+				req.flash('notifyMenssaje', `Usuraio ${email} no se pudo registar debido a un error en el servidor`);
 				logger.error(`No se pudo registrar ${email} debido a ${err}`);
 				return done(true, err);
 			});
