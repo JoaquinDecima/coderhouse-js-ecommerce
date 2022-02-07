@@ -16,17 +16,11 @@ export default class UserMongoManager{
 			});
 	}
 
-	// Crea un usuario y retorna el ID
+	// Crea un usuario
 	addUser(user){
 		user._id = user.email;
 
-		this.db.writeData(user)
-			.then(() =>{
-				return user.email;
-			})
-			.catch( err => {
-				return err;
-			});
+		return this.db.writeData(user);
 	}
 
 	// Elimina los usuarios con el id cartID
@@ -36,12 +30,6 @@ export default class UserMongoManager{
 
 	// Obtiene un usuario mediante su ID
 	getUserByID(userID){
-		this.db.readDataByID(userID)
-			.then(data => {
-				return data;
-			})
-			.catch(err => {
-				return err;
-			});
+		return this.db.readDataByID(userID);
 	}
 }
