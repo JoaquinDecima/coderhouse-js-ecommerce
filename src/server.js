@@ -2,6 +2,7 @@ import express from 'express';
 import exphbs from 'express-handlebars';
 import session from 'express-session';
 import passport from 'passport';
+import 'dotenv/config';
 import globalRouter from './routers/globalRouter.js';
 
 // SetUp del entorno
@@ -18,7 +19,7 @@ app.engine('hbs', exphbs ({
 }));
 // Init Session
 app.use(session({
-	secret: 'pepino',
+	secret: process.env.SECRET_SESSION,
 	resave: false,
 	saveUninitialized: false
 }));

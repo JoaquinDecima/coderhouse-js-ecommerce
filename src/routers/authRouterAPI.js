@@ -6,7 +6,8 @@ const authRouterAPI = express.Router();
 
 authRouterAPI.post('/register/', passport.authenticate('register',{
 	successRedirect: '/',
-	failureRedirect: '/error/register'
+	failureRedirect: '/error/register',
+	passReqToCallBack: true
 }));
 
 export default authRouterAPI;
