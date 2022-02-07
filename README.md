@@ -15,7 +15,15 @@ Este eCommerce fue desarrollado para el curso de CoderHouse con el nombre **Prog
 * **Tecnologias Utilizadas:**
   * Express
   * JavaScript
+  * MongoDB
+  * Passport
+  * Winston
+  * Flash
+  * Handlebars
+  * Bootstrap 5
+  * Fork Awesome
 * **URL de muestra:** *No Disponible*
+* **Theme:** Lynx PatoJAD (Creado bajo el nombre de Lynx Software Design para PatoJAD) 
 
 ## Como ejecutar el proyecto
 
