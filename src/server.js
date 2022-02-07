@@ -1,5 +1,8 @@
 import express from 'express';
 import exphbs from 'express-handlebars';
+import session from 'express-session';
+import passport from 'passport';
+import './model/passport/localAuth.js';
 import cartRouterAPI from './routers/cartRouterAPI.js';
 import productRouterAPI from './routers/productRouterAPI.js';
 
@@ -15,6 +18,14 @@ app.engine('hbs', exphbs ({
 	extname: 'hbs',
 	defaultLayout: 'index.hbs'
 }));
+// Init Session
+app.use(session({
+	secret: 'pepino',
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Configuro la app Express (setters)
 app.set('view engine', 'hbs');
