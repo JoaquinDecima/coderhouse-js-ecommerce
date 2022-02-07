@@ -315,3 +315,13 @@ code::before{
     color: var(--site-color);
     border: 0px;
 }
+
+#notify{
+    opacity: 1;
+    position: fixed;
+    z-index: 9911;
+    top: 100px;
+    right: 20px;
+    background: var(--site-color);
+    font-weight: bold !important;
+}
