@@ -30,7 +30,6 @@ app.use(passport.session());
 
 app.use((req, res, next)=>{
 	app.locals.notifyMenssaje = req.flash('notifyMenssaje');
-	console.log(req.flash('notifyMenssaje'));
 	next();
 });
 
