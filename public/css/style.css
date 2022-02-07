@@ -155,7 +155,8 @@ a:hover, h4 a:hover{
 }
 
 .client-logo-section .client-logo-wrapper .client-logo-carousel .client-logo img{
-    height: 200px;
+    max-height: 200px;
+    margin-bottom: 80px;
 }
 
 .list-group{
