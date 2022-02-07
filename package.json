@@ -21,7 +21,8 @@
     "fs": "^0.0.1-security",
     "mongodb": "^4.2.1",
     "passport": "^0.5.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "winston": "^3.5.1"
   },
   "devDependencies": {
     "eslint": "^8.8.0",
