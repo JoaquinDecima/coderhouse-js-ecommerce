@@ -2,9 +2,7 @@ import express from 'express';
 import exphbs from 'express-handlebars';
 import session from 'express-session';
 import passport from 'passport';
-import './model/passport/localAuth.js';
-import cartRouterAPI from './routers/cartRouterAPI.js';
-import productRouterAPI from './routers/productRouterAPI.js';
+import globalRouter from './routers/globalRouter.js';
 
 // SetUp del entorno
 const app = express();
@@ -31,17 +29,7 @@ app.use(passport.session());
 app.set('view engine', 'hbs');
 
 // Configuro las Rutas
-app.use('/api/carrito', cartRouterAPI);
-app.use('/api/productos', productRouterAPI);
-
-app.get('/', (req,res)=>{
-	res.render('index');
-});
-
-// Se definen casos por defecto
-app.get('*', (req, res) => {
-	res.status(404).send({error:-2, descripcion:'Ruta no implementada'});
-});
+app.use('/', globalRouter);
 
 // Inicio la Aplicacion
 app.listen(PORT, () => {
