@@ -302,3 +302,16 @@ code::before{
 .alert-warning p {
     color: #664d03;
 }
+
+.btn-primary{
+    border-radius: var(--site-radius);
+    padding: 15px 50px;
+    background: var(--site-color);
+    border: 0px;
+}
+
+.btn-primary:hover{
+    background: rgba(0,0,0,0);
+    color: var(--site-color);
+    border: 0px;
+}
