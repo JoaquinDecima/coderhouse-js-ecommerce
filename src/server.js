@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser';
 import express from 'express';
 import flash from 'express-flash';
 import exphbs from 'express-handlebars';
@@ -27,6 +28,7 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieParser());
 
 app.use((req, res, next)=>{
 	app.locals.notifyMenssaje = req.flash('notifyMenssaje');
