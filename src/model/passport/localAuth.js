@@ -1,5 +1,7 @@
+import bcrypt from 'bcrypt';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+import 'dotenv/config';
 import { usersData } from '../../instances.js';
 import { logger } from '../tools/logger.js';
 
@@ -17,7 +19,7 @@ passport.use('register', new LocalStrategy({
 		img: req.img,
 		address: req.address,
 		age: req.age,
-		password: password
+		password: bcrypt.hashSync(password, process.env.SECRET_PASSWORD)
 	};
 
 	if ([] == usersData.getUserByID(email)){
