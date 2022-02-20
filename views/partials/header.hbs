@@ -23,10 +23,11 @@
                             </li>
                         </ul>
                         <ul id="user-section" class="navbar-nav">
-                            {{#if session}}
+                            {{#if session.user}}
                                 <li class="nav-item">
-                                    <a class="page-scroll" title="Inicio" href="/auth/login">
-                                        {{session.user.name}}
+                                    {{session.user.name}}
+                                    <a class="page-scroll" title="Inicio" href="/auth/logout">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
                                     </a>
                                 </li>
                             {{else}}
