@@ -10,4 +10,10 @@ authRouterAPI.post('/register/', passport.authenticate('register',{
 	passReqToCallBack: true
 }));
 
+authRouterAPI.post('/login/', passport.authenticate('login',{
+	successRedirect: '/',
+	failureRedirect: '/error/login',
+	passReqToCallBack: true
+}));
+
 export default authRouterAPI;
