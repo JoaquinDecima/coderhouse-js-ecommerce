@@ -59,7 +59,7 @@ passport.use('login', new LocalStrategy({
 			if (user.length > 0 && bcrypt.compareSync(password, user[0].password)){
 				req.flash('notifyMenssaje', `Bienvenido ${user[0].name}`);
 				logger.info(`${email} Ingreso correctamente`);
-				return done(null, user);
+				return done(null, user[0]);
 			}else{
 				req.flash('notifyMenssaje', 'Usuario o contraseña incorrecta');
 				logger.warn(`Ususario o contraseña incorrecta para ${email}`);
@@ -75,6 +75,7 @@ passport.use('login', new LocalStrategy({
 
 // Serializacion
 passport.serializeUser((user, done)=>{
+	console.log(user);
 	return done(null, user);
 });
 
