@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import md5 from 'md5';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import 'dotenv/config';
@@ -16,7 +17,7 @@ passport.use('register', new LocalStrategy({
 		name: req.body.name,
 		lastname: req.body.lastname,
 		phone: req.body.phone,
-		img: req.body.img,
+		avatar: md5(req.body.name+req.body.lastname),
 		address: req.body.address,
 		age: req.body.age,
 		password: bcrypt.hashSync(password, 2)
