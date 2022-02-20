@@ -75,7 +75,6 @@ passport.use('login', new LocalStrategy({
 
 // Serializacion
 passport.serializeUser((user, done)=>{
-	console.log(user);
 	return done(null, user);
 });
 

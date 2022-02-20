@@ -34,7 +34,6 @@ app.use((req, res, next)=>{
 	next();
 });
 app.use((req,res,next)=>{
-	console.log(req.session.passport);
 	app.locals.session = req.session.passport;
 	next();
 });
