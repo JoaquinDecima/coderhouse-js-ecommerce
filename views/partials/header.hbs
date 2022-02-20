@@ -26,6 +26,12 @@
                             {{#if session.user}}
                                 <li class="nav-item">
                                     {{session.user.name}}
+                                    <img
+                                            src="/img/profile/{{session.user.avatar}}"
+                                            class="img-fluid"
+                                            style="max-height: 54px; border-radius: 100%"/>
+                                </li>
+                                <li class="nav-item">
                                     <a class="page-scroll" title="Inicio" href="/auth/logout">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i>
                                     </a>
@@ -37,7 +43,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="page-scroll" title="Inicio" href="/auto/register">
+                                    <a class="page-scroll" title="Inicio" href="/auth/register">
                                         <i class="fa fa-user-plus" aria-hidden="true"></i>
                                     </a>
                                 </li>
