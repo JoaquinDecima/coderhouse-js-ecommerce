@@ -11,49 +11,53 @@ passport.use('register', new LocalStrategy({
 	passwordField: 'password',
 	passReqToCallback: true
 }, (req, email, password, done) => {
-	let user = {
+	console.log(req.body);
+	let newUser = {
 		email,
-		name: req.name,
-		lastname: req.lastname,
-		phone: req.phone,
-		img: req.img,
-		address: req.address,
-		age: req.age,
-		password: bcrypt.hashSync(password, process.env.SECRET_PASSWORD)
+		name: req.body.name,
+		lastname: req.body.lastname,
+		phone: req.body.phone,
+		img: req.body.img,
+		address: req.body.address,
+		age: req.body.age,
+		password: bcrypt.hashSync(password, 20)
 	};
+	usersData.getUserByID(email)
+		.then(user => {
+			console.log(user);
+			if (user.length > 0){
+				req.flash('notifyMenssaje', `Usuraio ${email} ya tiene una cuenta creada, intente iniciar sesion.`);
+				logger.warn(`Usuario ${email} ya existe`);
+				return done(false,'Usuario Existente');
+			}else{
+				usersData.addUser(newUser)
+					.then(()=>{
+						req.flash('notifyMenssaje', `Usuraio ${email} registado con exito. Ya puedes iniciar sesion`);
+						console.info(`Se registro exitosamente ${email}`);
+						return done(null, newUser);
+					})
+					.catch(err => {
+						req.flash('notifyMenssaje', `Usuraio ${email} no se pudo registar debido a un error en el servidor`);
+						logger.error(`No se pudo registrar ${email} debido a ${err}`);
+						return done(false, err);
+					});
+			}
+		})
+		.catch(err=>{
+			req.flash('notifyMenssaje', `Usuraio ${email} no se pudo registar debido a un error en el servidor`);
+			logger.error(`No se pudo registrar ${email} debido a ${err}`);
+			return done(false, err);
+		});
 
-	if ([] == usersData.getUserByID(email)){
-		req.flash('notifyMenssaje', `Usuraio ${email} ya tiene una cuenta creada, intente iniciar sesion.`);
-		logger.warn(`Usuario ${email} ya existe`);
-		return done(true,'Usuario Existente');
-	}else{
-		usersData.addUser(user)
-			.then(()=>{
-				req.flash('notifyMenssaje', `Usuraio ${email} registado con exito. Ya puedes iniciar sesion`);
-				console.info(`Se registro exitosamente ${email}`);
-				return done(null, user);
-			})
-			.catch(err => {
-				req.flash('notifyMenssaje', `Usuraio ${email} no se pudo registar debido a un error en el servidor`);
-				logger.error(`No se pudo registrar ${email} debido a ${err}`);
-				return done(true, err);
-			});
-	}
 }));
 
 // Serializacion
 passport.serializeUser((user, done)=>{
-	return done(null, user._id);
+	return done(null, user);
 });
 
 
 // Deserializacion
-passport.deserializeUser((id, done)=>{
-	usersData.getUserByID(id)
-		.then(user =>{
-			return done(null, user[0]);
-		})
-		.catch(err => {
-			return done(true, err);
-		});
+passport.deserializeUser((user, done)=>{
+	return done(null, user);
 });
