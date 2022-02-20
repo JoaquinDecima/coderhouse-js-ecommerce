@@ -1,0 +1,27 @@
+{{> topbanner title="Iniciar Sesion" description="Ingresa con tu cuenta de Lynx Store"}}
+
+<div class="container pt-75 pb-75">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="/img/svg/login.svg" class="img-fluid" />
+        </div>
+        <div class="col-md-5">
+            <form class="container" action="/api/auth/login" method="POST">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="email" class="form-label">Correo</label>
+                        <input type="email" class="form-control" id="email" name="email" required/>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required/>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <button type="submit" class="btn btn-primary col-12">Iniciar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

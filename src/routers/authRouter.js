@@ -8,4 +8,9 @@ authRouter.get('/register', (req,res)=>{
 	res.render('register');
 });
 
+authRouter.get('/login', (req,res)=>{
+	logger.info(`[GET] se ingreso a /auth${req.url}`);
+	res.render('login');
+});
+
 export default authRouter;
