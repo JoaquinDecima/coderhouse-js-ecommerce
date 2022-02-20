@@ -1,14 +1,15 @@
 import express from 'express';
+import isNotAuthenticated from '../model/middleware/isNotAuthenticated.js';
 import {logger} from '../model/tools/logger.js';
 
 const errorRouter = express.Router();
 
-errorRouter.get('/register', (req, res)=>{
+errorRouter.get('/register',isNotAuthenticated, (req, res)=>{
 	logger.info(`[GET] se ingreso en /error${req.url}`);
 	res.render('errors/register');
 });
 
-errorRouter.get('/login', (req, res)=>{
+errorRouter.get('/login',isNotAuthenticated, (req, res)=>{
 	logger.info(`[GET] se ingreso en /error${req.url}`);
 	res.render('errors/login');
 });
