@@ -29,9 +29,13 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-
 app.use((req, res, next)=>{
 	app.locals.notifyMenssaje = req.flash('notifyMenssaje');
+	next();
+});
+app.use((req,res,next)=>{
+	console.log(req.session.passport);
+	app.locals.session = req.session.passport;
 	next();
 });
 
