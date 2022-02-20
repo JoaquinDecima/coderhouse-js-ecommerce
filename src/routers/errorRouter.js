@@ -8,4 +8,9 @@ errorRouter.get('/register', (req, res)=>{
 	res.render('errors/register');
 });
 
+errorRouter.get('/login', (req, res)=>{
+	logger.info(`[GET] se ingreso en /error${req.url}`);
+	res.render('errors/login');
+});
+
 export default errorRouter;
