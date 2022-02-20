@@ -329,3 +329,7 @@ code::before{
 .navbar-nav .nav-item a:hover{
     color: var(--site-color);
 }
+
+.dropdown-menu{
+    background-color: var(--bg-site);
+}
