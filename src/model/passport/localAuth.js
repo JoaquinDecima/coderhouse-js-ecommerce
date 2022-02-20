@@ -24,11 +24,10 @@ passport.use('register', new LocalStrategy({
 	};
 	usersData.getUserByID(email)
 		.then(user => {
-			console.log(user);
 			if (user.length > 0){
 				req.flash('notifyMenssaje', `Usuraio ${email} ya tiene una cuenta creada, intente iniciar sesion.`);
 				logger.warn(`Usuario ${email} ya existe`);
-				return done(false,'Usuario Existente');
+				return done(false, false);
 			}else{
 				usersData.addUser(newUser)
 					.then(()=>{
@@ -39,16 +38,40 @@ passport.use('register', new LocalStrategy({
 					.catch(err => {
 						req.flash('notifyMenssaje', `Usuraio ${email} no se pudo registar debido a un error en el servidor`);
 						logger.error(`No se pudo registrar ${email} debido a ${err}`);
-						return done(false, err);
+						return done(false, false);
 					});
 			}
 		})
 		.catch(err=>{
 			req.flash('notifyMenssaje', `Usuraio ${email} no se pudo registar debido a un error en el servidor`);
 			logger.error(`No se pudo registrar ${email} debido a ${err}`);
-			return done(false, err);
+			return done(false, false);
 		});
 
+}));
+
+passport.use('login', new LocalStrategy({
+	usernameField: 'email',
+	passwordField: 'password',
+	passReqToCallback: true
+},(req, email, password, done)=>{
+	usersData.getUserByID(email)
+		.then(user =>{
+			if (user.length > 0 && user[0].password == password){
+				req.flash('notifyMenssaje', `Bienvenido ${user[0].name}`);
+				req.info(`${email} Ingreso correctamente`);
+				return done(null, user);
+			}else{
+				req.flash('notifyMenssaje', 'Usuario o contraseña incorrecta');
+				req.warn(`Ususario o contraseña incorrecta para ${email}`);
+				return done(false, false);
+			}
+		})
+		.catch(err =>{
+			req.flash('notifyMenssaje', `Ocurrio un error al intentar ingresar con ${email} por favor intente nuevamente`);
+			logger.error(`No se pudo iniciar session con ${email} debido a ${err}`);
+			return done(false, false);
+		});
 }));
 
 // Serializacion
