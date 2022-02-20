@@ -11,7 +11,6 @@ passport.use('register', new LocalStrategy({
 	passwordField: 'password',
 	passReqToCallback: true
 }, (req, email, password, done) => {
-	console.log(req.body);
 	let newUser = {
 		email,
 		name: req.body.name,
@@ -20,7 +19,7 @@ passport.use('register', new LocalStrategy({
 		img: req.body.img,
 		address: req.body.address,
 		age: req.body.age,
-		password: bcrypt.hashSync(password, 20)
+		password: bcrypt.hashSync(password, 2)
 	};
 	usersData.getUserByID(email)
 		.then(user => {
@@ -32,7 +31,7 @@ passport.use('register', new LocalStrategy({
 				usersData.addUser(newUser)
 					.then(()=>{
 						req.flash('notifyMenssaje', `Usuraio ${email} registado con exito. Ya puedes iniciar sesion`);
-						console.info(`Se registro exitosamente ${email}`);
+						logger.info(`Se registro exitosamente ${email}`);
 						return done(null, newUser);
 					})
 					.catch(err => {
@@ -57,13 +56,13 @@ passport.use('login', new LocalStrategy({
 },(req, email, password, done)=>{
 	usersData.getUserByID(email)
 		.then(user =>{
-			if (user.length > 0 && user[0].password == password){
+			if (user.length > 0 && bcrypt.compareSync(password, user[0].password)){
 				req.flash('notifyMenssaje', `Bienvenido ${user[0].name}`);
-				req.info(`${email} Ingreso correctamente`);
+				logger.info(`${email} Ingreso correctamente`);
 				return done(null, user);
 			}else{
 				req.flash('notifyMenssaje', 'Usuario o contraseña incorrecta');
-				req.warn(`Ususario o contraseña incorrecta para ${email}`);
+				logger.warn(`Ususario o contraseña incorrecta para ${email}`);
 				return done(false, false);
 			}
 		})
