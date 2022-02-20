@@ -14,6 +14,7 @@ authRouter.get('/login', (req,res)=>{
 });
 
 authRouter.get('/logout', (req,res)=>{
+	req.flash('notifyMenssaje', `Adios ${req.session.passport.user.name}, esperamos que vuelvas pronto`);
 	req.logout();
 	res.redirect('/');
 });
