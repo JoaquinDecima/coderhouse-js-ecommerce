@@ -1,6 +1,6 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
-import flash from 'express-flash';
+import flash from 'connect-flash';
 import exphbs from 'express-handlebars';
 import session from 'express-session';
 import passport from 'passport';
@@ -22,7 +22,7 @@ app.engine('hbs', exphbs ({
 // Init Session
 app.use(session({
 	secret: process.env.SECRET_SESSION,
-	resave: false,
+	resave: true,
 	saveUninitialized: false
 }));
 app.use(flash());
