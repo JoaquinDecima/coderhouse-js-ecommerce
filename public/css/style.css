@@ -325,3 +325,7 @@ code::before{
     background: var(--site-color);
     font-weight: bold !important;
 }
+
+.navbar-nav .nav-item a:hover{
+    color: var(--site-color);
+}
