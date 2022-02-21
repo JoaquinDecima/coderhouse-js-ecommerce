@@ -5,6 +5,7 @@ import authRouterAPI from './authRouterAPI.js';
 import cartRouterAPI from './cartRouterAPI.js';
 import productRouterAPI from './productRouterAPI.js';
 import errorRouter from './errorRouter.js';
+import productRouter from './productRouter.js';
 
 
 const globalRouter = express.Router();
@@ -13,6 +14,7 @@ const globalRouter = express.Router();
 globalRouter.use('/api/auth/', authRouterAPI);
 globalRouter.use('/api/carrito', cartRouterAPI);
 globalRouter.use('/api/productos', productRouterAPI);
+globalRouter.use('/products/', productRouter);
 globalRouter.use('/auth/', authRouter);
 globalRouter.use('/error/', errorRouter);
 
