@@ -1,4 +1,4 @@
-export default function isAuthenticated(req, res, next) {
+export default function isSeller(req, res, next) {
 	if (req.isAuthenticated() && req.session.express.user.isSeller){
 		return next();
 	}
