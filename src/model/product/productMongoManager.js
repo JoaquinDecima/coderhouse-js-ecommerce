@@ -7,24 +7,12 @@ export default class ProductMongoManager {
 
 	// Retorna todos los productos
 	getAllProducts(){
-		this.db.readData()
-			.then(data => {
-				return data;
-			})
-			.catch( err => {
-				return err;
-			});
+		return this.db.readData();
 	}
 
 	// Obtiene un producto mediante su ID
 	getPorductByID(productID){
-		this.db.readDataByID(productID)
-			.then(data => {
-				return data;
-			})
-			.catch(err => {
-				return err;
-			});
+		return this.db.readDataByID(productID);
 	}
 
 	// Elimina los productos con el id productID
