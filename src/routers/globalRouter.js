@@ -12,8 +12,8 @@ const globalRouter = express.Router();
 
 // Use other Routers
 globalRouter.use('/api/auth/', authRouterAPI);
-globalRouter.use('/api/carrito', cartRouterAPI);
-globalRouter.use('/api/productos', productRouterAPI);
+globalRouter.use('/api/cart', cartRouterAPI);
+globalRouter.use('/api/products', productRouterAPI);
 globalRouter.use('/products/', productRouter);
 globalRouter.use('/auth/', authRouter);
 globalRouter.use('/error/', errorRouter);
