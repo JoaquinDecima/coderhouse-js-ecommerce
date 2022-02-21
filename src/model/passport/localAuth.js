@@ -20,6 +20,7 @@ passport.use('register', new LocalStrategy({
 		avatar: md5(req.body.name+req.body.lastname),
 		address: req.body.address,
 		age: req.body.age,
+		isSeller : req.body.seller == 'on',
 		password: bcrypt.hashSync(password, 2)
 	};
 	usersData.getUserByID(email)
