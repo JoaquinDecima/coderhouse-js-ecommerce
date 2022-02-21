@@ -23,6 +23,7 @@ export default class ProductMongoManager {
 	// Agrega un Porducto
 	addProdcut(nombre, descripcion, codigo, foto, precio, stock){
 		const newProduct = {
+			_id: codigo,
 			timestamp: Date.now(),
 			nombre,
 			descripcion,
@@ -32,7 +33,7 @@ export default class ProductMongoManager {
 			stock
 		};
 
-		this.db.writeData(newProduct);
+		return this.db.writeData(newProduct);
 	}
 
 	// Edita el producto de id :id

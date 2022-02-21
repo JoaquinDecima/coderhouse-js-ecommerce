@@ -1,7 +1,7 @@
 // Utilidad a modo ejemplo que determina si un usuario es admin o no
 // ATTENCION: Actualmente esto returna true siempre
-function isAdmin(user){
-	return (true || user);
+function canSell(user){
+	return (user.isSeller == 'on');
 }
 
-export {isAdmin};
+export {canSell};
