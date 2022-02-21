@@ -7,13 +7,23 @@ const productRouter = express.Router();
 productRouter.get('/', (req, res)=>{
 	productsData.getAllProducts()
 		.then(products => {
+			res.render('products/index', products);
+		})
+		.catch(error => {
+			logger.error(`No se puedo mostrar productos debiado a ${error}`);
+			res.redirect('/404');
+		});
+});
+
+productRouter.get('/add/', (req, res)=>{
+	productsData.getAllProducts()
+		.then(products => {
 			res.render('products', products);
 		})
 		.catch(error => {
 			logger.error(`No se puedo mostrar productos debiado a ${error}`);
 			res.redirect('/404');
 		});
-
 });
 
 export default productRouter;
