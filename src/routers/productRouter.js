@@ -8,7 +8,7 @@ const productRouter = express.Router();
 productRouter.get('/', (req, res)=>{
 	productsData.getAllProducts()
 		.then(products => {
-			res.render('products/index', products);
+			res.render('products/index', {products});
 		})
 		.catch(error => {
 			logger.error(`No se puedo mostrar productos debiado a ${error}`);
