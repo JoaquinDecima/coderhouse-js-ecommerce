@@ -61,7 +61,7 @@ productRouterAPI.post('/', upload.single('foto'), function(req, res){
 						.then(() => {
 							req.flash('notifyMenssaje', `Se agrego producto ${req.body.codigo} correctamente`);
 							logger.info(`Se agrego producto ${req.body.codigo}`);
-							res.send(req.body.codigo);
+							res.redirect('/');
 						})
 						.catch(error => {
 							req.flash('notifyMenssaje', 'Ocurrio un error en el servidor, por favor vuelva a intentarlo');
