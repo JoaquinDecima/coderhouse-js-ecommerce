@@ -3,18 +3,26 @@
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 g-4" style="margin: 50px 0px;">
 
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+        {{#each products}}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/img/productos/{{this.foto}}" class="card-img-top" alt="{{this.nombre}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.nombre}}</h5>
+                        <p class="card-text">{{this.descripcion}}</p>
+                    </div>
+                    <div class="card-footer container">
+                        <div class="row">
+                            <a href="" class="btn btn-primary col-12" style="margin-bottom: 10px">Ver producto</a>
+                            <div class="col-6 text-center" style="margin: auto; font-weight: bold; font-size: 30px;">
+                                $ {{this.precio}}
+                            </div>
+                            <a href="" class="btn btn-primary col-6"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        {{/each}}
 
     </div>
 </div>

@@ -331,5 +331,24 @@ code::before{
 }
 
 .dropdown-menu{
-    background-color: var(--bg-site);
+    background-color: var(--bg-site-3);
+}
+
+.card{
+    border-radius: var(--site-radius);
+    background: var(--bg-site-3);
+}
+
+.card-img, .card-img-top {
+    border-top-left-radius: var(--site-radius);
+    border-top-right-radius: var(--site-radius);
+}
+
+.card-footer {
+    background-color: rgba(0,0,0,.4);
+    border-top: 2px solid var(--site-color);
+}
+
+.card-footer:last-child {
+    border-radius: 0 0 var(--site-radius) var(--site-radius);
 }
