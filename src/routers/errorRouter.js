@@ -19,4 +19,9 @@ errorRouter.get('/permisos', (req, res)=>{
 	res.render('errors/permisos');
 });
 
+errorRouter.get('/addproduct', (req, res)=>{
+	logger.info(`[GET] se ingreso en /error${req.url}`);
+	res.render('errors/addproduct');
+});
+
 export default errorRouter;
