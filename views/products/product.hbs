@@ -1,0 +1,38 @@
+{{> topbanner title=product.nombre description=product.descripcion}}
+
+<div class="container">
+    <div class="row" style="margin: 60px 0px">
+        <div class="col-md-4">
+            <img
+                src="/img/productos/{{product.foto}}"
+                class="img-fluid" title="{{product.nombre}}"
+                alt="{{product.nombre}}"
+                style="border-radius: var(--site-radius)" />
+            <h2 style="padding: 30px;" class="text-center">
+                ARS$ {{product.precio}}
+            </h2>
+            <a class="btn btn-primary col-12" href="">
+                Agregar al carrito <i class="fa fa-cart-plus ms-auto" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="col-md-8 post-details">
+            <h1 class="text-center" style="color: var(--site-color); margin-bottom: 30px; padding: 0px 100px;">
+                {{product.nombre}}
+            </h1>
+            <p class="text-justify" style="padding: 60px;">{{product.descripcion}}</p>
+
+            <table class="table" style="color: var(--text-color)">
+                <tbody>
+                    <tr>
+                        <th scope="row">Stock</th>
+                        <td class="text-center">{{product.stock}} disponibles</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Codigo</th>
+                        <td class="text-center">{{product.codigo}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
