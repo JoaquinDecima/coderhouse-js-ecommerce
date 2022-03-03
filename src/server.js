@@ -6,6 +6,8 @@ import session from 'express-session';
 import passport from 'passport';
 import 'dotenv/config';
 import globalRouter from './routers/globalRouter.js';
+import {cartsData} from './instances.js';
+import {logger} from './model/tools/logger.js';
 
 // SetUp del entorno
 const app = express();
@@ -35,7 +37,37 @@ app.use((req, res, next)=>{
 });
 app.use((req,res,next)=>{
 	app.locals.session = req.session.passport;
-	next();
+
+	// Set session cart
+
+	if(req.session.passport){
+		cartsData.getCartByID(req.session.passport.user.email)
+			.then(carts => {
+				if (carts.length == 0){
+					cartsData.addCart(req.session.passport.user.email)
+						.then(() => {
+							logger.info(`Se creo el carrito ${req.session.passport.user.email}`);
+							next();
+						})
+						.catch(error => {
+							logger.error(`Error al crear el carrito id ${req.session.passport.user.email} : ${error}`);
+							next();
+						});
+				} else {
+					app.locals.cart = carts[0];
+					console.log(app.locals.cart);
+					next();
+				}
+			})
+			.catch(err => {
+				logger.error(`Error al obtener el carrito id ${req.session.passport.user.email} : ${err}`);
+				next();
+			});
+	}else {
+		next();
+	}
+
+
 });
 
 // Configuro la app Express (setters)
