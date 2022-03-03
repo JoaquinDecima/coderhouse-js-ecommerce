@@ -1,10 +1,9 @@
 import MongoManager from '../../dao/mongoManager.js';
-import ProductMongoManager from '../product/productMongoManager.js';
 
 export default class CartMongoManager{
-	constructor(file = null, db = 'coderhouse') {
+	constructor(file = null, productsManger, db = 'coderhouse') {
 		this.db = new MongoManager(file, db, 'carts');
-		this.product = new ProductMongoManager(file, db, 'products');
+		this.product = productsManger;
 	}
 
 	// Retorna todos los carritos
@@ -19,14 +18,12 @@ export default class CartMongoManager{
 	}
 
 	// Crea un carrito y retorna el ID
-	addCart(){
+	addCart(user){
 		this.db.writeData({
+			_id: user,
 			timestamp: Date.now(),
 			products: []
-		})
-			.then(response => {
-				return response.toArray();
-			});
+		});
 	}
 
 	// Elimina los carritos con el id cartID
@@ -36,24 +33,18 @@ export default class CartMongoManager{
 
 	// Obtiene un carrito mediante su ID
 	getCartByID(cartID){
-		this.db.readDataByID(cartID)
-			.then(data => {
-				return data;
-			})
-			.catch(err => {
-				return err;
-			});
+		return this.db.readDataByID(cartID);
 	}
 
 	// Retorna los productos del carrico con id cartID
-	getProductsOfCartWhitID(cartID){
-		let cart = this.getCartByID(cartID);
+	async getProductsOfCartWhitID(cartID){
+		let cart = await this.getCartByID(cartID);
 		return cart.products;
 	}
 
 	// Agrega el producto con id productID al carrito con id cartID
-	addProductsOfCartWhitID(cartID, productID){
-		const product = this.product.getPorductByID(productID);
+	async addProductsOfCartWhitID(cartID, productID){
+		const product = await this.product.getPorductByID(productID);
 
 		this.db.updateData({
 			products: this.getProductsOfCartWhitID(cartID).concat(product)
