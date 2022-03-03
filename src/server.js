@@ -55,6 +55,7 @@ app.use((req,res,next)=>{
 						});
 				} else {
 					app.locals.cart = carts[0];
+					app.locals.cart.haveProducts = carts[0].products.length > 0;
 					console.log(app.locals.cart);
 					next();
 				}

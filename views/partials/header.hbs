@@ -28,6 +28,17 @@
                             </li>
                         </ul>
                         <ul id="user-section" class="navbar-nav">
+                            {{#if cart}}
+                                <button type="button" class="btn position-relative" style="color: var(--text-color)">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                    {{#if cart.haveProducts }}
+                                        <span class="translate-middle badge rounded-pill" style="background: var(--site-color); top: -5px; left: 15px;">
+                                            {{cart.products.length}}
+                                            <span class="visually-hidden">Porductos</span>
+                                        </span>
+                                    {{/if}}
+                                </button>
+                            {{/if}}
                             {{#if session.user}}
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
