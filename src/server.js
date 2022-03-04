@@ -6,8 +6,8 @@ import session from 'express-session';
 import passport from 'passport';
 import 'dotenv/config';
 import globalRouter from './routers/globalRouter.js';
-import {cartsData} from './instances.js';
-import {logger} from './model/tools/logger.js';
+import notify from './model/middleware/notify.js';
+import sessionData from './model/middleware/sessionData.js';
 
 // SetUp del entorno
 const app = express();
@@ -31,45 +31,8 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-app.use((req, res, next)=>{
-	app.locals.notifyMenssaje = req.flash('notifyMenssaje');
-	next();
-});
-app.use((req,res,next)=>{
-	app.locals.session = req.session.passport;
-
-	// Set session cart
-
-	if(req.session.passport){
-		cartsData.getCartByID(req.session.passport.user.email)
-			.then(carts => {
-				if (carts.length == 0){
-					cartsData.addCart(req.session.passport.user.email)
-						.then(() => {
-							logger.info(`Se creo el carrito ${req.session.passport.user.email}`);
-							next();
-						})
-						.catch(error => {
-							logger.error(`Error al crear el carrito id ${req.session.passport.user.email} : ${error}`);
-							next();
-						});
-				} else {
-					app.locals.cart = carts[0];
-					app.locals.cart.haveProducts = carts[0].products.length > 0;
-					console.log(app.locals.cart);
-					next();
-				}
-			})
-			.catch(err => {
-				logger.error(`Error al obtener el carrito id ${req.session.passport.user.email} : ${err}`);
-				next();
-			});
-	}else {
-		next();
-	}
-
-
-});
+app.use(notify);
+app.use(sessionData);
 
 // Configuro la app Express (setters)
 app.set('view engine', 'hbs');
