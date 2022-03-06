@@ -51,7 +51,7 @@ function drawCart(){
 	let cartSection = document.getElementById('cart-section') ;
 	let request = new XMLHttpRequest();
 
-	request.open('GET', `api/cart/${localStorage.getItem('email')}/productos/`);
+	request.open('GET', `/api/cart/${localStorage.getItem('email')}/productos/`);
 	request.responseType = 'json';
 
 	request.onload = function() {
@@ -61,6 +61,46 @@ function drawCart(){
 				${request.response.length}
 				<span class="visually-hidden">Porductos</span>
 			</span>`;
+	};
+
+	request.send();
+}
+
+async function drawProducts(){
+	let productsSection = document.getElementById('products-section') ;
+	let request = new XMLHttpRequest();
+
+	request.open('GET', '/api/products/');
+	request.responseType = 'json';
+
+	request.onload = function() {
+		let html = '';
+		request.response.forEach(elem =>{
+			html = html.concat(`
+				<div class="col">
+					<div class="card h-100">
+						<img src="/img/productos/${elem.foto}" class="card-img-top" alt="${elem.nombre}">
+						<div class="card-body">
+							<h5 class="card-title">${elem.nombre}</h5>
+							<br />
+							<p class="card-text">${elem.descripcion}</p>
+						</div>
+						<div class="card-footer container">
+							<div class="row">
+								<a href="/products/${elem.codigo}" class="btn btn-primary col-12" style="margin-bottom: 10px">Ver producto</a>
+								<div class="col-6 text-center" style="margin: auto; font-weight: bold; font-size: 30px;">
+									$ ${elem.precio}
+								</div>
+								${localStorage.getItem('email') != 'false' ? `
+									<a href="#" onclick="addToCart('${localStorage.getItem('email')}','${elem.codigo}')" class="btn btn-primary col-6">
+										<i class="fa fa-cart-plus" aria-hidden="true"></i>
+									</a>` : ''}
+							</div>
+						</div>
+					</div>
+				</div>`);
+		});
+		productsSection.innerHTML = html;
 	};
 
 	request.send();

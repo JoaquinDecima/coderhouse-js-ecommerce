@@ -1,28 +1,9 @@
-{{> topbanner title="Nuestros Productos" description="Prodras ver los productos que ofrece la tienda"}}
+{{> topbanner title="Nuestros Productos" description="Prodras ver los productos que ofrece nuestra tienda"}}
 
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin: 50px 0px;">
-
-        {{#each products}}
-            <div class="col">
-                <div class="card h-100">
-                    <img src="/img/productos/{{this.foto}}" class="card-img-top" alt="{{this.nombre}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.nombre}}</h5>
-                        <p class="card-text">{{this.descripcion}}</p>
-                    </div>
-                    <div class="card-footer container">
-                        <div class="row">
-                            <a href="/products/{{this.codigo}}" class="btn btn-primary col-12" style="margin-bottom: 10px">Ver producto</a>
-                            <div class="col-6 text-center" style="margin: auto; font-weight: bold; font-size: 30px;">
-                                $ {{this.precio}}
-                            </div>
-                            <a href="" class="btn btn-primary col-6"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {{/each}}
-
-    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="products-section" style="margin: 50px 0px;"></div>
 </div>
+
+<script>
+    drawProducts();
+</script>

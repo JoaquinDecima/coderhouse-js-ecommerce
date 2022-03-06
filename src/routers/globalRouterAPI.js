@@ -7,6 +7,6 @@ const globalRouterAPI = express.Router();
 
 globalRouterAPI.use('/auth/', authRouterAPI);
 globalRouterAPI.use('/cart/', cartRouterAPI);
-globalRouterAPI.use('/products', productRouterAPI);
+globalRouterAPI.use('/products/', productRouterAPI);
 
 export default globalRouterAPI;
