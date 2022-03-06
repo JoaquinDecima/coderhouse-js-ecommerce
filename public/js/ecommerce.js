@@ -1,16 +1,15 @@
-function addToCart(cartId, productId){
+function addToCart(cartId, productID){
 	fetch(`/api/cart/${cartId}/productos`,{
-		method:'POST',
+		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		redirect: 'follow',
-		body: {productId}
+		body: JSON.stringify({productID})
 	})
-		.then( res => {
-			console.log(res);
+		.then (() => {
+			drawCart();
 		})
-		.catch( err => {
+		.catch(err => {
 			console.log(err);
 		});
 }

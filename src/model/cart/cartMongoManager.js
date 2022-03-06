@@ -1,9 +1,10 @@
 import MongoManager from '../../dao/mongoManager.js';
+import {productsData} from '../../instances.js';
 
 export default class CartMongoManager{
 	constructor(file = null, productsManger, db = 'coderhouse') {
 		this.db = new MongoManager(file, db, 'carts');
-		this.product = productsManger;
+		this.product = productsData;
 	}
 
 	// Retorna todos los carritos
@@ -39,16 +40,20 @@ export default class CartMongoManager{
 	// Retorna los productos del carrico con id cartID
 	async getProductsOfCartWhitID(cartID){
 		let cart = await this.getCartByID(cartID);
+		console.log(cart);
 		return cart[0].products;
 	}
 
 	// Agrega el producto con id productID al carrito con id cartID
 	async addProductsOfCartWhitID(cartID, productID){
-		const product = await this.product.getPorductByID(productID);
-
-		this.db.updateData({
-			products: this.getProductsOfCartWhitID(cartID).concat(product)
-		}, { _id:cartID });
+		this.product.getPorductByID(productID)
+			.then(async product => {
+				console.log(product);
+				let productList = await this.getProductsOfCartWhitID(cartID);
+				this.db.updateData({
+					products: productList.concat(product)
+				}, { _id:cartID });
+			});
 	}
 
 	// Elimina el producto con id productID del carrito con id cartID
