@@ -39,7 +39,7 @@ export default class CartMongoManager{
 	// Retorna los productos del carrico con id cartID
 	async getProductsOfCartWhitID(cartID){
 		let cart = await this.getCartByID(cartID);
-		return cart.products;
+		return cart[0].products;
 	}
 
 	// Agrega el producto con id productID al carrito con id cartID

@@ -1,37 +1,69 @@
 import express from 'express';
-import cartManager from '../model/cart/cartManager.js';
 import {logger} from '../model/tools/logger.js';
+import {cartsData} from '../instances.js';
 
 const cartRouterAPI = express.Router();
 
 // Crea un carrito nuevo y retorna su ID
 cartRouterAPI.post('/', function(req, res){
-	const id = cartManager.addCart();
-	res.send({id});
+	cartsData.addCart(req.body.id);
+	res.send({id : req.body.id});
 });
 
 // Elimina el carrito con id :id
 cartRouterAPI.delete('/:id', function(req, res){
 	logger.info(`[DELETE] se ingreso en ${req.url}`);
-	res.send(cartManager.removeCartById(req.params.id));
+	cartsData.removeCartById(req.params.id)
+		.then(result =>{
+			logger.info(`Se Borro correctamente carrito ${req.params.id} - ${result}`);
+			res.status(204).send();
+		})
+		.catch(err => {
+			logger.error(`Error: ${err} al intentar Borrar el carrito ${req.params.id}`);
+			res.status(502).send(err);
+		});
 });
 
 // Retorna los productos del carrito con id :id
 cartRouterAPI.get('/:id/productos', function(req, res){
 	logger.info(`[GET] se ingreso en ${req.url}`);
-	res.send(cartManager.getProductsOfCartWhitID(req.params.id));
+	cartsData.getProductsOfCartWhitID(req.params.id)
+		.then(result =>{
+			logger.info(`Se obtubieron correctamente los productos del carrito ${req.params.id} - ${result}`);
+			res.send(result);
+		})
+		.catch(err => {
+			logger.error(`Error: ${err} al obtener productos de ${req.params.id}`);
+			res.status(502).send(err);
+		});
 });
 
 // Agrega el producto con id productID al carrito con id :id
 cartRouterAPI.post('/:id/productos', function(req, res){
 	logger.info(`[POST] se ingreso en ${req.url}`);
-	res.send(cartManager.addProductsOfCartWhitID(req.params.id, req.body.productID));
+	cartsData.addProductsOfCartWhitID(req.params.id, req.body.productID)
+		.then(result => {
+			logger.info(`Se agrego correctamente producto ${req.body.productID} al carrito ${req.params.id} - ${result}`);
+			res.status(204).send();
+		})
+		.catch(err => {
+			logger.error(`Error: ${err} al agregar producto en ${req.params.id}`);
+			res.status(502).send(err);
+		});
 });
 
 // Remueve los productos con id id_prod del carrito con id :id
 cartRouterAPI.delete('/:id/productos/:id_prod', function(req, res){
 	logger.info(`[DELETE] se ingreso en ${req.url}`);
-	res.send(cartManager.removeProductsOfCartWhitID(req.params.id, req.params.id_prod));
+	cartsData.removeProductsOfCartWhitID(req.params.id, req.params.productID)
+		.then(result => {
+			logger.info(`Se borró correctamente producto ${req.body.productID} al carrito ${req.params.id} - ${result}`);
+			res.status(204).send();
+		})
+		.catch(err => {
+			logger.error(`Error: ${err} al agregar producto en ${req.params.id}`);
+			res.status(502).send(err);
+		});
 });
 
 // Exporto ruta
