@@ -3,7 +3,7 @@ async function drawUserSection(){
 	let html = '';
 	if(localStorage.getItem('email') != 'false'){
 		html = `
-			<button type="button" id="cart-section" class="btn position-relative" style="color: var(--text-color)">
+			<button onclick="window.location.href='/cart/';" type="button" id="cart-section" class="btn position-relative" style="color: var(--text-color)">
 			</button>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,6 +101,50 @@ async function drawProducts(){
 				</div>`);
 		});
 		productsSection.innerHTML = html;
+	};
+
+	request.send();
+}
+
+function drawCartList(){
+	let cartSection = document.getElementById('cart-list-section') ;
+	let request = new XMLHttpRequest();
+
+	request.open('GET', `/api/cart/${localStorage.getItem('email')}/productos/`);
+	request.responseType = 'json';
+
+	request.onload = function() {
+		let html = `
+			<table class="table">
+				<thead>
+					<tr style="color: var(--site-color);">
+						<th scope="col">#</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Cantidad</th>
+						<th scope="col">Precio</th>
+					</tr>
+				</thead>
+				<tbody>`;
+		let total = 0;
+		request.response.forEach(elem => {
+			html = html.concat(`
+			<tr style="vertical-align: middle; font-size: 20px; color: var(--text-color)">
+				<th scope="row">
+					<img src="/img/productos/${elem.foto}" class="img-fluid" alt="${elem.nombre}"  title="${elem.nombre}" style="max-width: 70px; border-radius: var(--site-radius)">
+				</th>
+				<td>${elem.nombre}</td>
+				<td>1</td>
+				<td>$ ${elem.precio}</td>
+			</tr>`);
+			total += parseInt(elem.precio, 10);
+		});
+		cartSection.innerHTML = html.concat(`
+				<tr style="vertical-align: middle; font-size: 20px; color: var(--text-color)">
+					<td colspan="3" class="text-center">Total</td>
+					<td>$ ${total}</td>
+				</tr>
+			</tbody>
+		</table>`);
 	};
 
 	request.send();
