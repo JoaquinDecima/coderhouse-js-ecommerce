@@ -2,7 +2,7 @@ import Mongodb from 'mongodb';
 
 export default class MongoManager{
 	constructor(uri, db, collection){
-		this.client = new Mongodb.MongoClient(uri);
+		this.client = new Mongodb.MongoClient(uri,{ useUnifiedTopology: true});
 		this.db = db;
 		this.collection = collection;
 	}
@@ -31,7 +31,7 @@ export default class MongoManager{
 		try {
 			await this.client.connect();
 			await this.client.db(this.db).collection(this.collection).deleteOne({_id:id});
-		}finally {
+		} finally {
 			await this.client.close();
 		}
 	}
