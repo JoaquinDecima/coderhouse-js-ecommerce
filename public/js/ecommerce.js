@@ -22,9 +22,9 @@ async function deleteForCart(cartID, productID){
 		},
 		body: JSON.stringify({productID})
 	})
-		.then (() => {
-			drawCart();
-			drawCartList();
+		.then (async () => {
+			await drawCart();
+			await drawCartList();
 		})
 		.catch(err => {
 			console.log(err);

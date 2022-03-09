@@ -62,9 +62,9 @@ cartRouterAPI.post('/:id/productos', function(req, res){
 // Remueve los productos con id id_prod del carrito con id :id
 cartRouterAPI.delete('/:id/productos/:id_prod', function(req, res){
 	logger.info(`[DELETE] se ingreso en /api/cart${req.url}`);
-	cartsData.removeProductsOfCartWhitID(req.params.id, req.params.productID)
+	cartsData.removeProductsOfCartWhitID(req.params.id, req.params.id_prod)
 		.then(result => {
-			logger.info(`Se borró correctamente producto ${req.body.productID} al carrito ${req.params.id} - ${result}`);
+			logger.info(`Se borró correctamente producto ${req.params.id_prod} al carrito ${req.params.id} - ${result}`);
 			res.status(204).send();
 		})
 		.catch(err => {

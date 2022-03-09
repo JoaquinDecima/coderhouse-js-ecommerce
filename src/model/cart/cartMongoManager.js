@@ -78,25 +78,19 @@ export default class CartMongoManager{
 	async removeProductsOfCartWhitID(cartID, productID){
 		let productList = await this.getProductsOfCartWhitID(cartID);
 		let removed = false;
-
-		productList = productList.map(elem =>{
+		productList.map(elem =>{
 			if (elem._id == productID && elem.cant > 1){
 				elem.cant -= 1;
 				removed = true;
 			}
 		});
-
-		if(removed){
-			this.db.updateData({
-				products: productList
-			}, { _id:cartID });
-		}else{
-			this.db.updateData({
-				products: productList.filter(product => product.id != productID)
-			}, { _id:cartID });
+		if(!removed){
+			productList = productList.filter(elem => elem._id !== productID);
 		}
-
-
+		console.log(productList);
+		await this.db.updateData({
+			products: productList
+		}, { _id:cartID });
 	}
 
 }
