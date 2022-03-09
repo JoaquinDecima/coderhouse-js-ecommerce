@@ -122,6 +122,7 @@ function drawCartList(){
 						<th scope="col">Nombre</th>
 						<th scope="col">Cantidad</th>
 						<th scope="col">Precio</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>`;
@@ -135,13 +136,18 @@ function drawCartList(){
 				<td>${elem.nombre}</td>
 				<td>1</td>
 				<td>$ ${elem.precio}</td>
+				<td>
+					<button class="btn btn-primary" onclick="deleteForCart('${localStorage.getItem('email')}', '${elem._id}');">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</td>
 			</tr>`);
 			total += parseInt(elem.precio, 10);
 		});
 		cartSection.innerHTML = html.concat(`
 				<tr style="vertical-align: middle; font-size: 20px; color: var(--text-color)">
 					<td colspan="3" class="text-center">Total</td>
-					<td>$ ${total}</td>
+					<td colspan="2" class="text-center">$ ${total}</td>
 				</tr>
 			</tbody>
 		</table>`);
