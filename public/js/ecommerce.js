@@ -30,3 +30,19 @@ async function deleteForCart(cartID, productID){
 			console.log(err);
 		});
 }
+
+async function buyCart(cartID){
+	fetch(`/api/cart/${cartID}/buy`,{
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then (async () => {
+			await drawCart();
+			await drawCartList();
+		})
+		.catch(err => {
+			console.log(err);
+		});
+}

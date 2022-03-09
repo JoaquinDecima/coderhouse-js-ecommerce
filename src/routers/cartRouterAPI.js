@@ -1,6 +1,8 @@
 import express from 'express';
 import {logger} from '../model/tools/logger.js';
 import {cartsData} from '../instances.js';
+import sendMail from '../model/tools/sendMail.js';
+import {compra} from '../model/tools/writeMail.js';
 
 const cartRouterAPI = express.Router();
 
@@ -69,6 +71,29 @@ cartRouterAPI.delete('/:id/productos/:id_prod', function(req, res){
 		})
 		.catch(err => {
 			logger.error(`Error: ${err} al agregar producto en ${req.params.id}`);
+			res.status(502).send(err);
+		});
+});
+
+cartRouterAPI.post('/:id/buy', function(req, res){
+	logger.info(`[POST] se ingreso en /api/cart${req.url}`);
+	cartsData.getProductsOfCartWhitID(req.params.id)
+		.then(async (products) =>{
+			sendMail(
+				compra(
+					products,
+					req.session.passport.user.name,
+					req.session.passport.user.email,
+					req.session.passport.user.phone,
+					req.session.passport.user.address),
+				'osbaldo.ferry4@ethereal.email',
+				req.session.passport.user.email,
+				`Nuevo pedido de ${req.session.passport.user.name} - ${req.session.passport.user.email}`);
+			await cartsData.removeCartById(req.params.id);
+			res.status(202).send();
+		})
+		.catch(err => {
+			logger.error(`Error: ${err} al vender carro ${req.params.id} [Obtener items]`);
 			res.status(502).send(err);
 		});
 });

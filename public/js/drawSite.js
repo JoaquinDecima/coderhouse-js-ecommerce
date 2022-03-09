@@ -173,7 +173,13 @@ function drawCartList(){
 					<td colspan="3" class="text-center">$ ${total}</td>
 				</tr>
 			</tbody>
-		</table>`);
+		</table>
+		<button
+			class="btn btn-primary col-12"
+			style="padding: 30px"
+			onclick="buyCart('${localStorage.getItem('email')}');">
+			Confirmar Compra
+		</button>`);
 	};
 
 	request.send();
