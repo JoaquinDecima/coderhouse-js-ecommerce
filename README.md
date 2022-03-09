@@ -16,10 +16,13 @@ Este eCommerce fue desarrollado para el curso de CoderHouse con el nombre **Prog
   * Express
   * JavaScript
   * MongoDB
+  * Compression
   * Passport
   * Winston
   * Flash
   * Handlebars
+  * Twilio
+  * Nodemailer
   * Bootstrap 5
   * Fork Awesome
 * **URL de muestra:** *No Disponible*
@@ -33,6 +36,22 @@ Para poder correr el proyecto debemos clonarlo e instalar las dependencias, esto
 git clone https://github.com/JoaquinDecima/coderhouse-js-ecommerce
 cd coderhouse-js-ecommerce
 npm i
+```
+
+Luego debemos poder nuestras prorpias credecianles en el `.env` para eso podemos copiar el `.env.example` que nos muestra las credenciales que necesitamos.
+
+```dotenv
+## MongoDB
+MONGO_USERS=sample
+MONGO_PRODUCTS=sample
+MONGO_CARTS=sample
+
+## Secrets
+SECRET_SESSION=sample
+
+#Twilio
+TWILIO_SMS_SID=sample
+TWILIO_SMS_TOKEN=sample
 ```
 
 Una vez que tengamos las dependencias instaladas podemos ejecutarlo de la siguiente manera:
