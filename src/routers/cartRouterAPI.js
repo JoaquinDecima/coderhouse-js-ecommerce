@@ -3,6 +3,7 @@ import {logger} from '../model/tools/logger.js';
 import {cartsData} from '../instances.js';
 import sendMail from '../model/tools/sendMail.js';
 import {compra} from '../model/tools/writeMail.js';
+import sendSMS from '../model/tools/sendSMS.js';
 
 const cartRouterAPI = express.Router();
 
@@ -89,6 +90,9 @@ cartRouterAPI.post('/:id/buy', function(req, res){
 				'osbaldo.ferry4@ethereal.email',
 				req.session.passport.user.email,
 				`Nuevo pedido de ${req.session.passport.user.name} - ${req.session.passport.user.email}`);
+			//sendSMS(
+			//	req.session.passport.user.phone,
+			//	`Nuevo pedido de ${req.session.passport.user.name} - ${req.session.passport.user.email}`);
 			await cartsData.removeCartById(req.params.id);
 			res.status(202).send();
 		})

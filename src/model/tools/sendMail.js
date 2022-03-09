@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
 	}
 });
 
-export default function sendMail(mail, destination, sender, title){
+export default async function sendMail(mail, destination, sender, title){
 	transporter.sendMail({
 		from: sender,
 		to: destination,
