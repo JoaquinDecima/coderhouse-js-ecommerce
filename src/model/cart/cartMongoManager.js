@@ -19,8 +19,8 @@ export default class CartMongoManager{
 	}
 
 	// Crea un carrito y retorna el ID
-	addCart(user){
-		this.db.writeData({
+	async addCart(user){
+		await this.db.writeData({
 			_id: user,
 			timestamp: Date.now(),
 			products: []
@@ -46,21 +46,57 @@ export default class CartMongoManager{
 
 	// Agrega el producto con id productID al carrito con id cartID
 	async addProductsOfCartWhitID(cartID, productID){
-		this.product.getPorductByID(productID)
+		let productList = await this.getProductsOfCartWhitID(cartID);
+		await this.product.getPorductByID(productID)
 			.then(async product => {
-				console.log(product);
-				let productList = await this.getProductsOfCartWhitID(cartID);
-				this.db.updateData({
-					products: productList.concat(product)
-				}, { _id:cartID });
+				let exist = false;
+				productList.forEach(elem =>{
+					exist = exist || elem._id === productID;
+				});
+				if(exist){
+					productList.map(elem => {
+						if (elem._id == productID){
+							elem.cant += 1;
+						}
+					});
+					await this.db.updateData({
+						products: productList
+					}, { _id:cartID });
+				}else{
+					console.log(product);
+					product[0].cant = 1;
+					delete product[0].stock;
+					await this.db.updateData({
+						products: productList.concat(product[0])
+					}, { _id:cartID });
+				}
+
 			});
 	}
 
 	// Elimina el producto con id productID del carrito con id cartID
-	removeProductsOfCartWhitID(cartID, productID){
-		this.db.updateData({
-			products: this.getProductsOfCartWhitID(cartID).filter(product => product.id != productID)
-		}, { _id:cartID });
+	async removeProductsOfCartWhitID(cartID, productID){
+		let productList = await this.getProductsOfCartWhitID(cartID);
+		let removed = false;
+
+		productList = productList.map(elem =>{
+			if (elem._id == productID && elem.cant > 1){
+				elem.cant -= 1;
+				removed = true;
+			}
+		});
+
+		if(removed){
+			this.db.updateData({
+				products: productList
+			}, { _id:cartID });
+		}else{
+			this.db.updateData({
+				products: productList.filter(product => product.id != productID)
+			}, { _id:cartID });
+		}
+
+
 	}
 
 }
