@@ -71,7 +71,6 @@ function drawCart(){
 	request.responseType = 'json';
 
 	request.onload = function() {
-		console.log(request.response);
 		if (request.response.length == undefined){
 			createCart();
 		} else {
@@ -144,6 +143,7 @@ function drawCartList(){
 						<th scope="col">Nombre</th>
 						<th scope="col">Cantidad</th>
 						<th scope="col">Precio</th>
+						<th scope="col">Total</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -156,20 +156,21 @@ function drawCartList(){
 					<img src="/img/productos/${elem.foto}" class="img-fluid" alt="${elem.nombre}"  title="${elem.nombre}" style="max-width: 70px; border-radius: var(--site-radius)">
 				</th>
 				<td>${elem.nombre}</td>
-				<td>1</td>
+				<td>${elem.cant}</td>
 				<td>$ ${elem.precio}</td>
+				<td>$ ${parseInt(elem.cant, 10) * parseInt(elem.precio, 10)}</td>
 				<td>
 					<button class="btn btn-primary" onclick="deleteForCart('${localStorage.getItem('email')}', '${elem._id}');">
 						<i class="fa fa-trash" aria-hidden="true"></i>
 					</button>
 				</td>
 			</tr>`);
-			total += parseInt(elem.precio, 10);
+			total +=  (parseInt(elem.cant, 10) * parseInt(elem.precio, 10));
 		});
 		cartSection.innerHTML = html.concat(`
 				<tr style="vertical-align: middle; font-size: 20px; color: var(--text-color)">
 					<td colspan="3" class="text-center">Total</td>
-					<td colspan="2" class="text-center">$ ${total}</td>
+					<td colspan="3" class="text-center">$ ${total}</td>
 				</tr>
 			</tbody>
 		</table>`);
