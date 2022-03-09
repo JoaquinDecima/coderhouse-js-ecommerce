@@ -1,3 +1,19 @@
+async function createCart(){
+	fetch('/api/cart/',{
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({id: localStorage.getItem('email')})
+	})
+		.then (() => {
+			drawCart();
+		})
+		.catch(err => {
+			console.log(err);
+		});
+}
+
 async function drawUserSection(){
 	let userSection = document.getElementById('user-section');
 	let html = '';
@@ -55,12 +71,18 @@ function drawCart(){
 	request.responseType = 'json';
 
 	request.onload = function() {
-		cartSection.innerHTML = `
+		console.log(request.response);
+		if (request.response.length == undefined){
+			createCart();
+		} else {
+			cartSection.innerHTML = `
 			<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 			<span class="translate-middle badge rounded-pill" style="background: var(--site-color); top: -5px; left: 15px;">
 				${request.response.length}
 				<span class="visually-hidden">Porductos</span>
 			</span>`;
+		}
+
 	};
 
 	request.send();
