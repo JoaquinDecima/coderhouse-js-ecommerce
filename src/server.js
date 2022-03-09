@@ -1,5 +1,6 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import compression from 'compression';
 import flash from 'connect-flash';
 import exphbs from 'express-handlebars';
 import session from 'express-session';
@@ -27,6 +28,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: false
 }));
+app.use(compression());
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
