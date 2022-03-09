@@ -7,8 +7,14 @@ const cartRouterAPI = express.Router();
 // Crea un carrito nuevo y retorna su ID
 cartRouterAPI.post('/', function(req, res){
 	logger.info(`[POST] se ingreso en /api/cart${req.url}`);
-	cartsData.addCart(req.body.id);
-	res.send({id : req.body.id});
+	cartsData.addCart(req.body.id)
+		.then(()=>{
+			res.status(202).send({id : req.body.id});
+		})
+		.catch(err=>{
+			logger.error(`Error: ${err} al intentar Crear el carrito ${req.body.id}`);
+		});
+
 });
 
 // Elimina el carrito con id :id
