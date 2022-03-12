@@ -59,3 +59,15 @@ Una vez que tengamos las dependencias instaladas podemos ejecutarlo de la siguie
 ```shell
 npm start
 ```
+
+## Parametros de Lanzamiento
+
+El proyecto permite utilizar variables para modificar el comportamiento, estos parametros son los siguientes:
+
+* `--modo=` permite cambiar el modo cluster y fork *(default fork)*
+
+Un ejemplo del uso de esto es:
+
+```bash
+npm start -- --modo=cluster
+```
