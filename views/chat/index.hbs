@@ -1,0 +1,29 @@
+{{> topbanner title="Chat" description="Chat comunitario, un espacio para que la comunidad hable"}}
+
+<link rel="stylesheet" href="/css/chat.css" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="chat_window">
+                <div class="top_menu">
+                    <div class="title">Chat</div>
+                </div>
+                <ul id="message-area" class="messages"></ul>
+                <div class="bottom_wrapper clearfix">
+                    <div class="message_input_wrapper">
+                        <input class="message_input" id="chat-mensaje" placeholder="Type your message here..." />
+                    </div>
+                    <button class="send_message" onclick="sendMenssaje();">
+                        <div class="icon"></div>
+                        <div class="text"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>
