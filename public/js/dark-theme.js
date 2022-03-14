@@ -17,7 +17,7 @@ function updateTheme(){
 		themeButton.innerHTML = '<i class="fa fa-sun fa-2x" aria-hidden="true"></i>';
 	} else {
 		root.style.setProperty('--bg-site-g' , '#FFF');
-		root.style.setProperty('--bg-site', '#3763EB');
+		root.style.setProperty('--bg-site', '#FFF');
 		root.style.setProperty('--bg-site-2', '#EFF2F9');
 		root.style.setProperty('--bg-site-3', 'rgba(106, 124, 146, 0.1)');
 		root.style.setProperty('--a-color-2', '#6A7C92');
