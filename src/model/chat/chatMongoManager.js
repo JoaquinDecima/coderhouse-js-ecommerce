@@ -1,5 +1,5 @@
 import MongoManager from '../../dao/mongoManager.js';
-import {logger} from '../tools/logger.js';
+import {logger} from '../../tools/logger.js';
 
 export default class ChatMongoManager {
 	constructor(file = null, db = 'coderhouse') {

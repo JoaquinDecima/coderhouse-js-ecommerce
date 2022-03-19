@@ -1,5 +1,5 @@
 import express from 'express';
-import { logger } from '../model/tools/logger.js';
+import { logger } from '../tools/logger.js';
 import authRouter from './authRouter.js';
 import errorRouter from './errorRouter.js';
 import productRouter from './productRouter.js';

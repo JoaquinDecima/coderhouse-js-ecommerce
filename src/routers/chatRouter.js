@@ -1,5 +1,5 @@
 import express from 'express';
-import isAuthenticated from '../model/middleware/isAuthenticated.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 
 const chatRouter = new express.Router();
 

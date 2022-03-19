@@ -1,7 +1,7 @@
 import express from 'express';
 import { productsData } from '../instances.js';
-import isSeller from '../model/middleware/isSeller.js';
-import { logger } from '../model/tools/logger.js';
+import isSeller from '../middleware/isSeller.js';
+import { logger } from '../tools/logger.js';
 
 const productRouter = express.Router();
 

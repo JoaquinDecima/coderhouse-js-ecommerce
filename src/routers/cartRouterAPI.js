@@ -1,9 +1,9 @@
 import express from 'express';
-import {logger} from '../model/tools/logger.js';
+import {logger} from '../tools/logger.js';
 import {cartsData} from '../instances.js';
-import sendMail from '../model/tools/sendMail.js';
-import {compra} from '../model/tools/writeMail.js';
-import sendSMS from '../model/tools/sendSMS.js';
+import sendMail from '../tools/sendMail.js';
+import {compra} from '../tools/writeMail.js';
+import sendSMS from '../tools/sendSMS.js';
 
 const cartRouterAPI = express.Router();
 

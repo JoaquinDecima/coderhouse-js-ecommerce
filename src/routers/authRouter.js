@@ -1,7 +1,7 @@
 import express from 'express';
-import isAuthenticated from '../model/middleware/isAuthenticated.js';
-import isNotAuthenticated from '../model/middleware/isNotAuthenticated.js';
-import {logger} from '../model/tools/logger.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
+import isNotAuthenticated from '../middleware/isNotAuthenticated.js';
+import {logger} from '../tools/logger.js';
 
 const authRouter = new express.Router();
 

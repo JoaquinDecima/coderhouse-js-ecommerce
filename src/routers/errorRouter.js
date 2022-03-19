@@ -1,6 +1,6 @@
 import express from 'express';
-import isNotAuthenticated from '../model/middleware/isNotAuthenticated.js';
-import {logger} from '../model/tools/logger.js';
+import isNotAuthenticated from '../middleware/isNotAuthenticated.js';
+import {logger} from '../tools/logger.js';
 
 const errorRouter = express.Router();
 

@@ -4,9 +4,9 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import 'dotenv/config';
 import { usersData } from '../../instances.js';
-import { logger } from '../tools/logger.js';
-import sendMail from '../tools/sendMail.js';
-import {register} from '../tools/writeMail.js';
+import { logger } from '../../tools/logger.js';
+import sendMail from '../../tools/sendMail.js';
+import {register} from '../../tools/writeMail.js';
 
 // Registro local con Passport
 passport.use('register', new LocalStrategy({

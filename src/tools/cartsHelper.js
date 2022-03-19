@@ -1,4 +1,4 @@
-import { cartsData } from '../../instances.js';
+import { cartsData } from '../instances.js';
 import { logger } from './logger.js';
 
 export default function getCart(id){

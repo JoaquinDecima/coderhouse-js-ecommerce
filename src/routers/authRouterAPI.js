@@ -2,7 +2,7 @@ import express from 'express';
 import md5 from 'md5';
 import multer from 'multer';
 import passport from 'passport';
-import '../model/passport/localAuth.js';
+import '../middleware/passport/localAuth.js';
 
 const storage = multer.diskStorage({
 	destination: './public/img/profile',
