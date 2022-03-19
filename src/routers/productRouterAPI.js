@@ -47,7 +47,6 @@ productRouterAPI.post('/', upload.single('foto'), function(req, res){
 		productsData.getPorductByID(req.body.codigo)
 			.then(product=>{
 				if (product.length > 0){
-					req.flash('notifyMenssaje', `No se agrego producto ${req.body.codigo} debido a que el SKU ya existe`);
 					logger.error(`No se agrego producto ${req.body.codigo} debido a que el SKU ya existe`);
 					res.redirect('/error/addproduct');
 				}else{
@@ -59,24 +58,20 @@ productRouterAPI.post('/', upload.single('foto'), function(req, res){
 						req.body.precio,
 						req.body.stock)
 						.then(() => {
-							req.flash('notifyMenssaje', `Se agrego producto ${req.body.codigo} correctamente`);
 							logger.info(`Se agrego producto ${req.body.codigo}`);
 							res.redirect('/');
 						})
 						.catch(error => {
-							req.flash('notifyMenssaje', 'Ocurrio un error en el servidor, por favor vuelva a intentarlo');
 							logger.error(`No se agrego producto ${req.body.codigo} debido a ${error}`);
 							res.redirect('/error/addproduct');
 						});
 				}
 			})
 			.catch(error => {
-				req.flash('notifyMenssaje', 'Ocurrio un error en el servidor, por favor vuelva a intentarlo');
 				logger.error(`No se agrego producto ${req.body.codigo} debido a ${error}`);
 				res.redirect('/error/addproduct');
 			});
 	} else {
-		req.flash('notifyMenssaje', 'No tiene permisos para realizar esta acción');
 		logger.warn(`[POST] No Autorizado /api/products${req.url}`);
 		res.redirect('/error/addproduct');
 	}

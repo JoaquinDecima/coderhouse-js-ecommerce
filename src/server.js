@@ -2,7 +2,6 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import compression from 'compression';
 import cluster from 'cluster';
-import flash from 'connect-flash';
 import exphbs from 'express-handlebars';
 import minimist from 'minimist';
 import os from 'os';
@@ -39,7 +38,6 @@ app.use(session({
 	saveUninitialized: false
 }));
 app.use(compression());
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
