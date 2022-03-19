@@ -25,6 +25,7 @@ Este eCommerce fue desarrollado para el curso de CoderHouse con el nombre **Prog
   * Nodemailer
   * Bootstrap 5
   * Fork Awesome
+  * SocketIO
 * **URL de muestra:** *No Disponible*
 * **Theme:** Lynx PatoJAD (Creado bajo el nombre de Lynx Software Design para PatoJAD) 
 
@@ -45,6 +46,7 @@ Luego debemos poder nuestras prorpias credecianles en el `.env` para eso podemos
 MONGO_USERS=sample
 MONGO_PRODUCTS=sample
 MONGO_CARTS=sample
+MONGO_CHAT=sample
 
 ## Secrets
 SECRET_SESSION=sample

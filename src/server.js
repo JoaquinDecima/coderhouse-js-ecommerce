@@ -14,12 +14,15 @@ import notify from './model/middleware/notify.js';
 import sessionData from './model/middleware/sessionData.js';
 import {logger} from './model/tools/logger.js';
 import { Server as HTTPServer } from 'http';
+import { Server as IOServer } from 'socket.io';
+import {chatData} from './instances.js';
 
 // SetUp del entorno
 const nodeParams = minimist(process.argv.slice(2));
 const app = express();
 const PORT = process.env.PORT || 8080;
 const httpServer = new HTTPServer(app);
+const io = new IOServer(httpServer);
 
 // Configuro la App Express (middlewares)
 app.use(express.urlencoded({ extended: true }));
@@ -48,6 +51,30 @@ app.set('view engine', 'hbs');
 
 // Configuro las Rutas
 app.use('/', globalRouter);
+
+io.on('connection', socket =>{
+
+	// Se conecta y recive todo el historial de mensajes
+	socket.emit('update-menssajes', chatData.getAllMenssage());
+
+	// Agrego mensaje y envio propago Mensajes
+	socket.on('add-menssaje', data => {
+		console.log(data);
+		chatData.addMenssage({
+			author : {
+				email: data.email,
+				nombre: data.name,
+				avatar: data.avatar
+			},
+			menssaje : data.mensaje,
+			date : new Date()
+		})
+			.then(() => socket.emit('update-menssajes', chatData.getAllMenssage()))
+			.catch (err => {
+				logger.error(`Error: ${err} al agregar mensaje`);
+			});
+	});
+});
 
 
 // Inicio la Aplicacion
