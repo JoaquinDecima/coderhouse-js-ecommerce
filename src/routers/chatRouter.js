@@ -3,7 +3,7 @@ import isAuthenticated from '../middleware/isAuthenticated.js';
 
 const chatRouter = new express.Router();
 
-chatRouter.get('', isAuthenticated, (req, res) => {
+chatRouter.get('', (req, res) => {
 	res.render('chat/index');
 });
 

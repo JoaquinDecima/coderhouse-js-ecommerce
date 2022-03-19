@@ -8,6 +8,6 @@ export default function isNotAuthenticated(req, res, next) {
 			res.redirect('/');
 		}
 	} catch(error) {
-		res.redirect('/');
+		next();
 	}
 }

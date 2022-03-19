@@ -6,7 +6,8 @@ import {usersData} from '../instances.js';
 import {logger} from '../tools/logger.js';
 import sendMail from '../tools/sendMail.js';
 import {register} from '../tools/writeMail.js';
-import {createToken} from '../tools/token.js';
+import {createToken, getIDInSession} from '../tools/token.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 
 const storage = multer.diskStorage({
 	destination: './public/img/profile',
@@ -72,7 +73,7 @@ authRouterAPI.post('/login/', (req, res) => {
 			if (user.length > 0 && bcrypt.compareSync(req.body.password, user[0].password)){
 				logger.info(`${req.body.email} Ingreso correctamente`);
 				res.send({
-					token: createToken({id:user._id})
+					token: createToken({id:user[0]._id})
 				});
 			}else{
 				logger.warn(`Ususario o contraseña incorrecta para ${req.body.email}`);
@@ -84,6 +85,21 @@ authRouterAPI.post('/login/', (req, res) => {
 		})
 		.catch(err =>{
 			logger.error(`No se pudo iniciar session con ${req.body.email} debido a ${err}`);
+			res.status(500).send({
+				error: 'Internal Server Error',
+				descripcion: err
+			});
+		});
+});
+
+authRouterAPI.get('/', isAuthenticated, (req, res) => {
+	usersData.getUserByID(getIDInSession(req.headers.token))
+		.then(user => {
+			delete user[0].password;
+			res.send(user[0]);
+		})
+		.catch(err =>{
+			logger.error(`No se pudo recuperar usuario debido a ${err}`);
 			res.status(500).send({
 				error: 'Internal Server Error',
 				descripcion: err

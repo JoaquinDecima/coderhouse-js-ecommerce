@@ -40,20 +40,4 @@
     </div>
 </header>
 
-{{# if session.user}}
-    <script>
-        localStorage.setItem('email', '{{session.user.email}}');
-        localStorage.setItem('name', '{{session.user.name}}');
-        localStorage.setItem('isSeller', '{{session.user.isSeller}}');
-        localStorage.setItem('avatar', '{{session.user.avatar}}');
-    </script>
-{{else}}
-    <script>
-        localStorage.setItem('email', false);
-        localStorage.setItem('name', false);
-        localStorage.setItem('isSeller', false);
-        localStorage.setItem('avatar', false);
-    </script>
-{{/if}}
-
 <script src="/js/drawSite.js"></script>

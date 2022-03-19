@@ -1,12 +1,9 @@
-import cookieParser from 'cookie-parser';
 import express from 'express';
 import compression from 'compression';
 import cluster from 'cluster';
 import exphbs from 'express-handlebars';
 import minimist from 'minimist';
 import os from 'os';
-import session from 'express-session';
-import passport from 'passport';
 import 'dotenv/config';
 import globalRouter from './routers/globalRouter.js';
 import {logger} from './tools/logger.js';
@@ -29,16 +26,7 @@ app.engine('hbs', exphbs ({
 	extname: 'hbs',
 	defaultLayout: 'index.hbs'
 }));
-// Init Session
-app.use(session({
-	secret: process.env.SECRET_SESSION,
-	resave: true,
-	saveUninitialized: false
-}));
 app.use(compression());
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(cookieParser());
 
 // Configuro la app Express (setters)
 app.set('view engine', 'hbs');

@@ -6,7 +6,7 @@
             <img src="/img/svg/login.svg" class="img-fluid" />
         </div>
         <div class="col-md-5">
-            <form class="container" action="/api/auth/login" method="POST">
+            <div class="container">
                 <div class="row">
                     <div class="col-12 mb-3">
                         <label for="email" class="form-label">Correo</label>
@@ -17,11 +17,13 @@
                         <input type="password" class="form-control" id="password" name="password" required/>
                     </div>
                     <div class="col-12 mb-3">
-                        <button type="submit" class="btn btn-primary col-12">Iniciar</button>
+                        <button type="submit" onclick="login();" class="btn btn-primary col-12">Iniciar</button>
                     </div>
                 </div>
 
-            </form>
+            </div>
         </div>
     </div>
 </div>
+
+<script src="/js/login.js"></script>

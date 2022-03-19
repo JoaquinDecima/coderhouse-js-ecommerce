@@ -15,10 +15,8 @@ authRouter.get('/login', isNotAuthenticated, (req,res)=>{
 	res.render('auth/login');
 });
 
-authRouter.get('/logout', isAuthenticated, (req,res)=>{
-	req.flash('notifyMenssaje', `Adios ${req.session.passport.user.name}, esperamos que vuelvas pronto`);
-	req.logout();
-	res.redirect('/');
+authRouter.get('/logout', (req,res)=>{
+	res.render('auth/logout');
 });
 
 export default authRouter;
