@@ -23,6 +23,7 @@
     "express-session": "^1.17.2",
     "firebase-admin": "^10.0.1",
     "fs": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "minimist": "^1.2.5",
     "mongodb": "^4.2.1",

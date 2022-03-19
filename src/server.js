@@ -9,8 +9,6 @@ import session from 'express-session';
 import passport from 'passport';
 import 'dotenv/config';
 import globalRouter from './routers/globalRouter.js';
-import notify from './middleware/notify.js';
-import sessionData from './middleware/sessionData.js';
 import {logger} from './tools/logger.js';
 import { Server as HTTPServer } from 'http';
 import { Server as IOServer } from 'socket.io';
@@ -41,8 +39,6 @@ app.use(compression());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-app.use(notify);
-app.use(sessionData);
 
 // Configuro la app Express (setters)
 app.set('view engine', 'hbs');
