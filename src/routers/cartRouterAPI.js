@@ -1,9 +1,11 @@
 import express from 'express';
 import {logger} from '../tools/logger.js';
-import {cartsData} from '../instances.js';
+import {cartsData, ordersData, usersData} from '../instances.js';
 import sendMail from '../tools/sendMail.js';
 import {compra} from '../tools/writeMail.js';
 import sendSMS from '../tools/sendSMS.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
+import {getIDInSession} from '../tools/token.js';
 
 const cartRouterAPI = express.Router();
 
@@ -26,7 +28,7 @@ cartRouterAPI.delete('/:id', function(req, res){
 	cartsData.removeCartById(req.params.id)
 		.then(result =>{
 			logger.info(`Se Borro correctamente carrito ${req.params.id} - ${result}`);
-			res.status(204).send();
+			res.redirect('/');
 		})
 		.catch(err => {
 			logger.error(`Error: ${err} al intentar Borrar el carrito ${req.params.id}`);
@@ -76,24 +78,34 @@ cartRouterAPI.delete('/:id/productos/:id_prod', function(req, res){
 		});
 });
 
-cartRouterAPI.post('/:id/buy', function(req, res){
+cartRouterAPI.post('/:id/buy', isAuthenticated, function(req, res){
 	logger.info(`[POST] se ingreso en /api/cart${req.url}`);
 	cartsData.getProductsOfCartWhitID(req.params.id)
 		.then(async (products) =>{
+			const user = await usersData.getUserByID(getIDInSession(req.headers.token));
 			sendMail(
 				compra(
 					products,
-					req.session.passport.user.name,
-					req.session.passport.user.email,
-					req.session.passport.user.phone,
-					req.session.passport.user.address),
+					user[0].name,
+					user[0].email,
+					user[0].phone,
+					user[0].address),
 				'osbaldo.ferry4@ethereal.email',
-				req.session.passport.user.email,
-				`Nuevo pedido de ${req.session.passport.user.name} - ${req.session.passport.user.email}`);
+				user[0].email,
+				`Nuevo pedido de ${user[0].name} - ${user[0].email}`);
 			//sendSMS(
-			//	req.session.passport.user.phone,
-			//	`Nuevo pedido de ${req.session.passport.user.name} - ${req.session.passport.user.email}`);
-			await cartsData.removeCartById(req.params.id);
+			//	user.phone,
+			//	`Nuevo pedido de ${user.name} - ${user.email}`);
+			const newOrder = {
+				products,
+				email: user[0].email,
+				number: Math.random(),
+				date: new Date(),
+				state: 'generada'
+			};
+			await ordersData.addOrder(newOrder);
+			await new Promise(r => setTimeout(r, 100));
+			cartsData.removeCartById(req.params.id);
 			res.status(202).send();
 		})
 		.catch(err => {

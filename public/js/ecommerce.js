@@ -2,7 +2,8 @@ async function addToCart(cartID, productID){
 	fetch(`/api/cart/${cartID}/productos`,{
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'token': localStorage.getItem('token')
 		},
 		body: JSON.stringify({productID})
 	})
@@ -18,7 +19,8 @@ async function deleteForCart(cartID, productID){
 	fetch(`/api/cart/${cartID}/productos/${productID}`,{
 		method:'DELETE',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'token': localStorage.getItem('token')
 		},
 		body: JSON.stringify({productID})
 	})
@@ -35,7 +37,8 @@ async function buyCart(cartID){
 	fetch(`/api/cart/${cartID}/buy`,{
 		method:'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'token': localStorage.getItem('token')
 		}
 	})
 		.then (async () => {

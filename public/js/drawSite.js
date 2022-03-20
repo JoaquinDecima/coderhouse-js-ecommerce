@@ -84,6 +84,11 @@ async function drawMenuSetion(){
 					<i class="fa fa-comments" aria-hidden="true"></i>
 				</a>
 			</li>
+			<li class="nav-item">
+				<a title="Server Info" href="/serverinfo">
+					<i class="fa fa-server" aria-hidden="true"></i>
+				</a>
+			</li>
 		`);
 	}
 
