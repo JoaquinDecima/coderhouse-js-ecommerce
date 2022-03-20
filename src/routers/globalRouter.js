@@ -6,8 +6,10 @@ import productRouter from './productRouter.js';
 import globalRouterAPI from './globalRouterAPI.js';
 import cartRouter from './cartRouter.js';
 import chatRouter from './chatRouter.js';
+import minimist from 'minimist';
+import os from 'os';
 
-
+const nodeParams = minimist(process.argv.slice(2));
 const globalRouter = express.Router();
 
 // Use other Routers
@@ -21,6 +23,19 @@ globalRouter.use('/error/', errorRouter);
 globalRouter.get('/', (req,res)=>{
 	logger.info(`[GET] se ingreso en ${req.url}`);
 	res.render('index');
+});
+
+globalRouter.get('/serverinfo/', (req, res) => {
+	logger.info(`[GET] se ingreso en ${req.url}`);
+	res.render('server',{
+		args: JSON.stringify(nodeParams),
+		platform: process.platform,
+		process_id: process.pid,
+		folder: process.env.PWD,
+		node_version: process.versions.node,
+		memory: process.memoryUsage().rss,
+		cores: os.cpus().length
+	});
 });
 
 // Se definen casos por defecto

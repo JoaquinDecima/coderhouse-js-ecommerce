@@ -1,0 +1,42 @@
+{{> topbanner title="Server Info" description="Información del Servidor que esta alojando la instancia"}}
+
+<div class="container mt-5 mb-4">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-warning table-striped" style="border-radius: var(--site-radius);">
+                <tbody>
+                <tr>
+                    <th scope="row">Argumentos</th>
+                    <td>
+                        {{args}}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Plataforma</th>
+                    <td>{{platform}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">PID</th>
+                    <td>{{process_id}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Carpeta</th>
+                    <td>{{folder}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Version de Node</th>
+                    <td>{{node_version}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Memoria</th>
+                    <td>{{memory}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Procesadores</th>
+                    <td>{{cores}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
