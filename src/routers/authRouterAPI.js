@@ -37,23 +37,17 @@ authRouterAPI.post('/register/', upload.single('avatar'), (req, res) => {
 		.then(user => {
 			if (user.length > 0){
 				logger.warn(`Usuario ${req.body.email} ya existe`);
-				res.status(400).send({
-					error: 'Bad Request',
-					descripcion: 'Usuario ya existente'
-				});
+				res.redirect('/error/register');
 			}else{
 				usersData.addUser(newUser)
 					.then(()=>{
 						logger.info(`Se registro exitosamente ${req.body.email}`);
 						sendMail(register(newUser),'osbaldo.ferry4@ethereal.email',req.body.email,'Nuevo usuario Registrado');
-						res.send();
+						res.redirect('/');
 					})
 					.catch(err => {
 						logger.error(`No se pudo registrar ${req.body.email} debido a ${err}`);
-						res.status(500).send({
-							error: 'Internal Server Error',
-							descripcion: err
-						});
+						res.redirect('/error/register');
 					});
 			}
 		})

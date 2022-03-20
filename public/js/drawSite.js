@@ -37,7 +37,7 @@ async function drawUserSection(){
 				</a>
 				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<li><a class="dropdown-item disabled" href="#">Perfil</a></li>
-					${ localStorage.getItem('isSeller') ? '<li><a class="dropdown-item" href="/products/add">Vender Producto &nbsp; &nbsp; &nbsp; <i class="fa fa-plus-circle ms-auto" aria-hidden="true"></i></a></li>' : ''}
+					${ localStorage.getItem('isSeller') == 'true' ? '<li><a class="dropdown-item" href="/products/add">Vender Producto &nbsp; &nbsp; &nbsp; <i class="fa fa-plus-circle ms-auto" aria-hidden="true"></i></a></li>' : ''}
 					<li><hr class="dropdown-divider"></li>
 					<li>
 						<a class="dropdown-item" href="/auth/logout">
