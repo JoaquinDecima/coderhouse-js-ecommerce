@@ -63,6 +63,33 @@ async function drawUserSection(){
 	localStorage.getItem('email') != 'false' ? drawCart() : null;
 }
 
+async function drawMenuSetion(){
+	let html = `
+		<li class="nav-item">
+			<a title="Inicio" href="/">
+				<i class="fa fa-home" aria-hidden="true"></i>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a title="Tienda" href="/products">
+				<i class="fa fa-shopping-bag" aria-hidden="true"></i>
+			</a>
+		</li>
+	`;
+
+	if(localStorage.getItem('email') != 'false'){
+		html = html.concat(`
+			<li class="nav-item">
+				<a title="Chat" href="/chat">
+					<i class="fa fa-comments" aria-hidden="true"></i>
+				</a>
+			</li>
+		`);
+	}
+
+	document.getElementById('nav-menu').innerHTML = html;
+}
+
 function drawCart(){
 	let cartSection = document.getElementById('cart-section') ;
 	let request = new XMLHttpRequest();
@@ -186,3 +213,4 @@ function drawCartList(){
 }
 
 drawUserSection();
+drawMenuSetion();
