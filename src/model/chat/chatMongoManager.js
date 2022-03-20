@@ -7,15 +7,8 @@ export default class ChatMongoManager {
 	}
 
 	// Retorna todos los productos
-	getAllMenssage(){
-		this.db.readData()
-			.then(result => {
-				return result;
-			})
-			.catch(err => {
-				logger.error(`Error: ${err} - Al recuperar Chat`);
-				return [];
-			});
+	async getAllMenssage(){
+		return await this.db.readData();
 	}
 
 	// Agrega un Porducto

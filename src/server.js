@@ -34,24 +34,23 @@ app.set('view engine', 'hbs');
 // Configuro las Rutas
 app.use('/', globalRouter);
 
-io.on('connection', socket =>{
+io.on('connection', async socket =>{
 
 	// Se conecta y recive todo el historial de mensajes
-	socket.emit('update-menssajes', chatData.getAllMenssage());
+	socket.emit('update-menssajes', await chatData.getAllMenssage());
 
 	// Agrego mensaje y envio propago Mensajes
 	socket.on('add-menssaje', data => {
-		console.log(data);
 		chatData.addMenssage({
 			author : {
-				email: data.email,
+				email: data.usuario,
 				nombre: data.name,
 				avatar: data.avatar
 			},
 			menssaje : data.mensaje,
 			date : new Date()
 		})
-			.then(() => socket.emit('update-menssajes', chatData.getAllMenssage()))
+			.then(async () => socket.emit('update-menssajes', await chatData.getAllMenssage()))
 			.catch (err => {
 				logger.error(`Error: ${err} al agregar mensaje`);
 			});
