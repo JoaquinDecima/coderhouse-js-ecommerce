@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 window.onscroll = function() {
 	var header_navbar = document.querySelector('.navbar-area');
 	var sticky = header_navbar.offsetTop;

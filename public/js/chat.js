@@ -1,3 +1,5 @@
+/* eslint-disable no-undef,no-unused-vars */
+
 const socket = io.connect();
 
 socket.on('update-menssajes', data => {

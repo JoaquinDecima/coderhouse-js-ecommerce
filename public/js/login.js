@@ -1,3 +1,5 @@
+/* eslint-disable no-undef,no-unused-vars */
+
 function login(){
 	let email = document.getElementById('email').value;
 	let password = document.getElementById('password').value;

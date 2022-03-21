@@ -1,3 +1,5 @@
+/* eslint-disable no-undef,no-unused-vars */
+
 async function addToCart(cartID, productID){
 	fetch(`/api/cart/${cartID}/productos`,{
 		method: 'POST',

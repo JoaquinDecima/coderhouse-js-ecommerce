@@ -1,3 +1,5 @@
+/* eslint-disable no-undef,no-unused-vars */
+
 let localStorage = window.localStorage;
 const root = document.documentElement;
 let isDark = false || localStorage.getItem('isDark');

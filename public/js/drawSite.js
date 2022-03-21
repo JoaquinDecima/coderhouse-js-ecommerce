@@ -1,3 +1,5 @@
+/* eslint-disable no-undef,no-unused-vars */
+
 async function createCart(){
 	fetch('/api/cart/',{
 		method:'POST',
