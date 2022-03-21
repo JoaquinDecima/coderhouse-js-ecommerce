@@ -17,7 +17,7 @@ async function createCart(){
 async function drawUserSection(){
 	let userSection = document.getElementById('user-section');
 	let html = '';
-	if(localStorage.getItem('email') != 'false'){
+	if(localStorage.getItem('email') != 'false' && localStorage.getItem('email') != null){
 		html = `
 			<button onclick="window.location.href='/cart/';" type="button" id="cart-section" class="btn position-relative" style="color: var(--text-color)">
 			</button>
@@ -60,7 +60,7 @@ async function drawUserSection(){
 			</li>`;
 	}
 	userSection.innerHTML = html;
-	localStorage.getItem('email') != 'false' ? drawCart() : null;
+	localStorage.getItem('email') != 'false' && localStorage.getItem('email') != null ? drawCart() : null;
 }
 
 async function drawMenuSetion(){
@@ -77,7 +77,7 @@ async function drawMenuSetion(){
 		</li>
 	`;
 
-	if(localStorage.getItem('email') != 'false'){
+	if(localStorage.getItem('email') != 'false' && localStorage.getItem('email') != null){
 		html = html.concat(`
 			<li class="nav-item">
 				<a title="Chat" href="/chat">
@@ -144,7 +144,7 @@ async function drawProducts(){
 								<div class="col-6 text-center" style="margin: auto; font-weight: bold; font-size: 30px;">
 									$ ${elem.precio}
 								</div>
-								${localStorage.getItem('email') != 'false' ? `
+								${localStorage.getItem('email') != 'false' && localStorage.getItem('email') != null ? `
 									<a href="#" onclick="addToCart('${localStorage.getItem('email')}','${elem.codigo}')" class="btn btn-primary col-6">
 										<i class="fa fa-cart-plus" aria-hidden="true"></i>
 									</a>` : ''}
