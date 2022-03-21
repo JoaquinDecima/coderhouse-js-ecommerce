@@ -24,16 +24,24 @@ function login(){
 				})
 					.then(async tempres => {
 						const user =  await tempres.json();
+						document.getElementById('notify-data').innerHTML = `Bienvenido ${user.name}`;
+						notifyToast.show();
 						localStorage.setItem('email', user.email);
 						localStorage.setItem('name', user.name);
 						localStorage.setItem('isSeller', user.isSeller);
 						localStorage.setItem('avatar', user.avatar);
 						window.location.replace('/');
 					})
-					.catch(err => console.log(err));
+					.catch(err => {
+						document.getElementById('notify-data-error').innerHTML = `Error al comprar el carrito ${err}`;
+						notifyToastError.show();
+						console.log(err);
+					});
 			}
 		})
 		.catch(err => {
+			document.getElementById('notify-data-error').innerHTML = `Error al comprar el carrito ${err}`;
+			notifyToastError.show();
 			console.log(err);
 		});
 }
