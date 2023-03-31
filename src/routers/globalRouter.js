@@ -20,21 +20,21 @@ globalRouter.use('/chat/', chatRouter);
 globalRouter.use('/auth/', authRouter);
 globalRouter.use('/error/', errorRouter);
 
-globalRouter.get('/', (req,res)=>{
+globalRouter.get('/', (req, res) => {
 	logger.info(`[GET] se ingreso en ${req.url}`);
 	res.render('index');
 });
 
 globalRouter.get('/serverinfo/', (req, res) => {
 	logger.info(`[GET] se ingreso en ${req.url}`);
-	res.render('server',{
+	res.render('server', {
 		args: JSON.stringify(nodeParams),
 		platform: process.platform,
 		process_id: process.pid,
 		folder: process.env.PWD,
 		node_version: process.versions.node,
 		memory: process.memoryUsage().rss,
-		cores: os.cpus().length
+		cores: os.cpus().length,
 	});
 });
 
