@@ -35,7 +35,7 @@ authRouterAPI.post('/register/', upload.single('avatar'), (req, res) => {
 
 	usersData.getUserByID(req.body.email)
 		.then(user => {
-			if (user.length > 0){
+			if (user){
 				logger.warn(`Usuario ${req.body.email} ya existe`);
 				res.redirect('/error/register');
 			}else{
