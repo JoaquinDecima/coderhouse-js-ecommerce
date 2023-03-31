@@ -8,34 +8,34 @@ Este eCommerce fue desarrollado para el curso de CoderHouse con el nombre **Prog
 
 ![Pato](https://patojad.com.ar/img/perfil.jpg)
 
-* **Nombre:** Joaquin Decima
-* **Apodo:** Pato
-* **Perfil CoderHouse:** https://plataforma.coderhouse.com/perfil/612cf2300afccd0011ec6c36
-* **Sitio Personal:** https://joaquindecima.gitlab.io/
+- **Nombre:** Joaquin Decima
+- **Apodo:** Pato
+- **Perfil CoderHouse:** https://plataforma.coderhouse.com/perfil/612cf2300afccd0011ec6c36
+- **Sitio Personal:** https://joaquindecima.gitlab.io/
 
 ---
 
 ## 📁 Datos del proyecto 📁
 
-* **Version de Node:** 😊 16.X
-* **Tecnologias Utilizadas:**
-  * 😍 Express
-  * 😍 JavaScript
-  * 😊 MongoDB
-  * 😍 Compression
-  * 😵 ~~Passport~~
-  * 🙄 Winston
-  * 😵 ~~Flash~~
-  * 🙄 Handlebars
-  * 🙄 Twilio
-  * 😊 Nodemailer
-  * 😍 Bootstrap 5
-  * 😍 Fork Awesome
-  * 😊 SocketIO
-  * 😊 JsonWebToken
-* **URL de muestra:** *No Disponible*
-* **Servidor:** 🙄 Heroku 
-* **Theme:** 😍 Lynx PatoJAD (Creado bajo el nombre de Lynx Software Design para PatoJAD) 
+- **Version de Node:** 😊 16.X
+- **Tecnologias Utilizadas:**
+  - 😍 Express
+  - 😍 JavaScript
+  - 😊 MongoDB
+  - 😍 Compression
+  - 😵 ~~Passport~~
+  - 🙄 Winston
+  - 😵 ~~Flash~~
+  - 🙄 Handlebars
+  - 🙄 Twilio
+  - 😊 Nodemailer
+  - 😍 Bootstrap 5
+  - 😍 Fork Awesome
+  - 😊 SocketIO
+  - 😊 JsonWebToken
+- **URL de muestra:** _No Disponible_
+- **Servidor:** 🙄 Heroku
+- **Theme:** 😍 Vasak PatoJAD (Creado bajo el nombre de Vasak Software Design para PatoJAD)
 
 ---
 
@@ -83,7 +83,7 @@ npm start
 
 El proyecto permite utilizar variables para modificar el comportamiento, estos parametros son los siguientes:
 
-* `--modo=` permite cambiar el modo cluster y fork *(default fork)*
+- `--modo=` permite cambiar el modo cluster y fork _(default fork)_
 
 Un ejemplo del uso de esto es:
 
